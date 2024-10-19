@@ -23,7 +23,7 @@ export class TheLastResort {
     addQuest(quest) {
         this.updateCurrent();
         this.quests.push(quest);
-        this.nameQuestsUI();
+        this.initNameQuestsUI(quest);
     }
     executeCmd(string = "") {
         // split par espace
@@ -137,25 +137,20 @@ export class TheLastResort {
         finishText.textContent = string;
         ulElement.replaceChildren(finishText);
     }
-    nameQuestsUI(){
-
+    initNameQuestsUI(quest){
+        let i = this.quests.length;
         let questElements = document.getElementById('list-quest');
-        console.log("questElements"+questElements);
-        let i = 0;
-        this.quests.forEach(quest => {
-            
-            let li = document.createElement('li');
-            console.log("li ; "+li);
-            li.innerHTML = `
-                <div class="checkbox-wrapper-19">
-                    <input type="checkbox" id="${i + 1}" />
-                    <label for="${i + 1}" class="check-box"></label>
-                </div>
-                ${quest.name}`;
-            questElements.appendChild(li);
-            i++;
-        });
-        
+
+        let li = document.createElement('li');
+        console.log("li ; "+li);
+        li.innerHTML = `
+            <div class="checkbox-wrapper-19">
+                <input type="checkbox" id="${i}" />
+                <label for="${i}" class="check-box"></label>
+            </div>
+            ${quest.name}`;
+        questElements.appendChild(li);
+        i++;
     }
     finish() {
         //stopper le timer TODO
