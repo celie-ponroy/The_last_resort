@@ -1,0 +1,171 @@
+@charset "UTF-8";
+* {
+  margin: 0em;
+  padding: 0em;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+}
+
+@font-face {
+  font-family: "digital-clock-font";
+  src: url("../fonts/digital-7.ttf");
+}
+body {
+  background-color: darkslategrey;
+}
+body .container {
+  margin: 3em;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+}
+body .container .computer {
+  border: 8mm ridge rgba(249, 253, 170, 0.6);
+  border-radius: 8px;
+  width: 55em;
+  height: 45em;
+  grid-row: 1/6;
+}
+body .container .computer .screen {
+  height: 100%;
+  font-size: 3em;
+  font-family: "Cascadia Code", sans-serif;
+  color: #0c0;
+  text-shadow: #0c0 1px 0 5px;
+  background-color: black;
+  animation: colorPulse 5s infinite ease-in-out;
+  background-image: radial-gradient(#444, #111);
+  box-shadow: 0 0 5vmin 1vmin #000 inset;
+  overflow: hidden;
+  /* Limiter les animations à l'intérieur de .screen */
+  position: relative;
+  /* Pour s'assurer que les pseudo-éléments sont contenus à l'intérieur */
+}
+body .container .computer .screen:before {
+  animation: wave 10s infinite ease-in-out;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* Assurer que l'animation commence à l'intérieur du cadre */
+  z-index: 1;
+  width: 100%;
+  /* Assurer que la vague ne dépasse pas la largeur de .screen */
+}
+body .container .computer .screen:after {
+  background-image: linear-gradient(transparent, transparent 3px, #222);
+  background-size: 4px 4px;
+  bottom: 0;
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+body .container .computer .screen:first-child, body .container .computer .screen:last-child {
+  padding-left: 3vmin;
+}
+body .container .computer .screen ul {
+  padding-top: 3vmin;
+}
+body .container .computer .screen ul li::before {
+  content: ">";
+  margin-right: 0.3em;
+}
+body .container .computer .screen form input,
+body .container .computer .screen form textarea,
+body .container .computer .screen form button {
+  background-color: transparent;
+  border: none;
+  animation: colorPulse 5s infinite ease-in-out;
+  font-size: inherit;
+  border-radius: 5px;
+  color: #0c0;
+  text-shadow: #0c0 1px 0 5px;
+}
+body .container .computer .screen form input:focus,
+body .container .computer .screen form textarea:focus,
+body .container .computer .screen form button:focus {
+  outline: none;
+}
+body .container .computer .screen form::before {
+  content: ">";
+}
+body .container .timer {
+  background-color: #222;
+  border: 8mm ridge rgb(0, 0, 0);
+  border-radius: 4px;
+  margin: 0.5em 2.5em 0.5em 2.5em;
+  grid-column: 2/-1;
+  text-align: center;
+  font-family: "digital-clock-font";
+  color: red;
+  font-size: 4em;
+}
+body .container .timer h1 {
+  padding: 0.2em;
+}
+body .container .quests {
+  grid-column: 2/-1;
+  grid-row: span 4;
+}
+body .container .quests ul.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  /* Colonnes flexibles qui s'adaptent */
+  gap: 10px;
+  /* Espacement entre les éléments */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body .container .quests ul.list li {
+  background: #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+@keyframes colorPulse {
+  0%, 100% {
+    color: #0c0;
+  }
+  48%, 52% {
+    color: #090;
+  }
+  50% {
+    color: #060;
+  }
+}
+@keyframes wave {
+  0% {
+    box-shadow: 0 -5vh 5vh #0c0;
+    top: -100vh;
+  }
+  48%, 52% {
+    box-shadow: 0 -5vh 5vh #090;
+  }
+  50% {
+    box-shadow: 0 -5vh 5vh #060;
+  }
+  100% {
+    box-shadow: 0 -5vh 5vh #0c0;
+    top: 100vh;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=main-terminal.css.map */

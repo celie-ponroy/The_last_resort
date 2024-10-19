@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main-terminal.css">
+    <title>The Last Resort - Terminal Player</title>
+</head>
+
+<body>
+
+    <header>
+        <h1></h1>
+    </header>
+
+    <div class="container">
+        <div class="computer">
+            <div class="screen">
+
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+
+                <form>
+                    <label for="user-input"></label>
+                    <input type="text" autocomplete="off" id=" user-input" name="user-input">
+                </form>
+            </div>
+
+        </div>
+
+        <div class="timer">
+            <h1>5:29</h1>
+        </div>
+
+        <div class="quests">
+            <ul class="list">
+                <li>Quest 1</li>
+                <li>Quest 2</li>
+                <li>Quest 3</li>
+                <li>Quest 4</li>
+                <li>Quest 5</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Le focus est défini dès que la page est prête
+            var inputElement = document.getElementById('user-input');
+            inputElement.focus();
+
+            // Maintenir le focus même si l'utilisateur clique ailleurs
+            inputElement.addEventListener('blur', function () {
+                this.focus();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
