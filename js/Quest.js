@@ -22,10 +22,10 @@ export class Quest{
         let i;
         for(i = 0; i<this.commands.length ; i++){
             if(this.executed[i]==false){
-                break;
+                return i;
             }
         }
-        return i;
+        return i;//the last by default
     }
 
     updateStatus(){

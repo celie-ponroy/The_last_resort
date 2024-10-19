@@ -4,15 +4,20 @@ import { TheLastResort } from "./TheLastResort.js";
 
 let theLastResort = new TheLastResort();
 let quest1 = new Quest("Réparer l'aile droite",["modify hello = true","run repairElectricalSystems.sh"])
+let quest2 = new Quest("Réparer l'aile gauche",["modify hello = true","run celie.sh"])
  
 
 theLastResort.addQuest(quest1);
+theLastResort.addQuest(quest2)
 /*
 //default values
 theLastResort.executeCmd("modify hello = true");
+
 theLastResort.executeCmd("run celie.sh");
 
 theLastResort.executeCmd('ls');
+theLastResort.executeCmd("run repairElectricalSystems.sh");
+console.log("quest1.finished"+quest1.finished);
 
 theLastResort.executeCmd('cd Documents');
 
@@ -32,7 +37,7 @@ form.addEventListener('submit', (event) => {
  });
 */
 
-
+theLastResort.updateQuestUI()
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#user-form');
