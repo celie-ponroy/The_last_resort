@@ -14,7 +14,7 @@ export class TheLastResort {
         this.initial = 0;
         this.countDownDate = 0;
         this.timeleft = 0;
-        this.initTimer(5);
+        this.initTimer(1);
 
     }
 
@@ -51,8 +51,6 @@ export class TheLastResort {
                     break;
 
                 case "ls":
-                    //script
-
                     this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
                     this.clearPrompt();
                     break;
@@ -119,7 +117,9 @@ export class TheLastResort {
                 return;
             }
         }
-        this.finish();
+        this.stopTimer();
+        this.finish(true);
+        
     }
 
     addcommandToUI(command) {
@@ -185,9 +185,12 @@ export class TheLastResort {
         }
     }
 
-    finish() {
-        this.stopTimer();
-        this.replaceUI('Well done you saved the earth!!');
+    finish(win) {
+        if(!win){
+            this.replaceUI('Oh no the robot was exploded :(  the atmosphere will still be dirty');
+        }
+        if(win)
+            this.replaceUI('Well done you saved the earth!!');
     }
 
     clearPrompt() {
@@ -221,6 +224,7 @@ export class TheLastResort {
         if (this.timeleft <= 0) {
             document.getElementById("timer-value").innerHTML = "00:00";
             this.stopTimer();  // Stop the timer when it reaches 0
+            this.finish(false);
         }
     }
 
