@@ -35,15 +35,19 @@ export class TheLastResort {
                 break;
 
             case "ls":
-                //script
+                //ls
 
                 this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
                 break;
 
             case "cd":
-                //script
-                this.current_dir = new Cd().execute(command[1], this.current_dir);
-
+                //cd
+                let cd = new Cd();
+                let new_current_dir = cd.execute(command[1], this.current_dir);
+                if(new_current_dir==null)
+                    this.addResultToUI("Something whent wrong :(");
+                else
+                    this.current_dir = new_current_dir;
                 break;
 
             case "run":
