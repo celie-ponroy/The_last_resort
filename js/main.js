@@ -8,3 +8,4 @@ console.log(quest1);
 
 theLastResort.addQuest(quest1);
 theLastResort.executeCmd("modify hello = true");
+theLastResort.executeCmd("run repairElectricalSystems.sh")

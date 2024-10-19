@@ -31,8 +31,15 @@ export class Script extends Command {
             case "celie.sh":
                 res = "its all good celie helped you :)";
                 break;
-                
+            case "repairPropellers.sh":
+            case "repairBattery.sh":
+            case "repairTankLeaks.sh":
+            case "repairElectricalSystems.sh":
+                res = "repairing ...\n"+
+                "repaired !";
+                break;
         }        
+        return res;
     }
 }
 /*

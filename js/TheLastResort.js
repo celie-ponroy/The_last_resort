@@ -25,7 +25,8 @@ export class TheLastResort{
                 break;
             case "run":
                 //script
-                new Script().execute(string);
+                let script = new Script()
+                console.log(script.execute(string));
                 break;
         }
 
