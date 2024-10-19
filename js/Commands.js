@@ -71,16 +71,11 @@ export class Nano extends Command {
 export class Cd extends Command {
     constructor() { super() }
     execute(argument, current_dir) {
-        console.log(argument);
         switch (argument) {
             case '..':
-                console.log(1);
                 return current_dir.dir_parent;
 
             default:
-                console.log(2);
-                console.log(argument + " et " + current_dir);
-                console.log(current_dir.getDirectoryByName(argument));
                 return current_dir.getDirectoryByName(argument);
 
         }

@@ -11,7 +11,7 @@ console.log("finished "+quest1.finished);
 theLastResort.executeCmd("modify hello = true");
 console.log("executed "+quest1.executed);
 console.log("finished "+quest1.finished);
-theLastResort.executeCmd("run repairElectricalSystems.sh");
+theLastResort.executeCmd("run celie.sh");
 console.log("executed "+quest1.executed);
 console.log("finished "+quest1.finished);
 

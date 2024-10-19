@@ -49,7 +49,6 @@ export class Quest{
 
     checkScript(command){
         let equal = this.compareCommands(command);
-        console.log("equal : "+equal);
         if(equal){
             this.executed[this.getCurrent()]= true;
             this.updateStatus();

@@ -38,15 +38,12 @@ export class TheLastResort {
                 //script
 
                 this.addcommandToUI(new Liste().execute(this.current_dir.dir_array));
-
-                console.log("ls de : " + this.current_dir.dir_array);
                 break;
 
             case "cd":
                 //script
                 this.current_dir = new Cd().execute(command[1], this.current_dir);
 
-                console.log('current dir tttttttttt' + new Cd().execute(command[1], this.current_dir));
                 break;
 
             case "run":
@@ -57,7 +54,6 @@ export class TheLastResort {
                 this.addResultToUI(res);
                 break;
         }
-        console.log("this.updateStatus appel :");
         this.updateStatus();
 
     }
@@ -73,13 +69,11 @@ export class TheLastResort {
     }
 
     updateStatus(){
-        console.log("this.updateStatus ");
         for(let i = 0; i < this.quests.length ; i++){
             if(this.quests[i].getFinished() == false){
                 return;
             }
         }
-        console.log("this.Finnish appel :");
         this.finish();
     }
 
