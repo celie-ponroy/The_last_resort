@@ -14,3 +14,14 @@ theLastResort.executeCmd("run repairElectricalSystems.sh");
 
 theLastResort.executeCmd('ls');
 
+theLastResort.executeCmd('cd Documents');
+
+theLastResort.executeCmd('ls');
+
+theLastResort.executeCmd('cd ..');
+
+theLastResort.executeCmd('ls');
+
+
+
+
