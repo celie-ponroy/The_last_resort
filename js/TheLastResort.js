@@ -160,15 +160,8 @@ export class TheLastResort {
     }
 
     finish() {
-        //stopper le timer TODO
+        this.stopTimer();
         this.replaceUI('Well done you saved the earth!!');
-    }
-    // Timer
-    initTimer(timeinitial) {
-        this.timeinitial = timeinitial;
-        this.now = new Date().getTime();
-        this.countDownDate = this.now + this.timeinitial * 60000;
-        this.updateTimer();
     }
 
     clearPrompt() {
@@ -177,6 +170,17 @@ export class TheLastResort {
     }
 
 
+    // Initialize Timer
+    initTimer(timeinitial) {
+        this.timeinitial = timeinitial;
+        this.now = new Date().getTime();
+        this.countDownDate = this.now + this.timeinitial * 60000;
+
+        // Start the timer and store the interval ID
+        this.timerInterval = setInterval(() => this.updateTimer(), 1000);
+    }
+
+    // Update Timer
     updateTimer() {
         this.now = new Date().getTime();
         this.timeleft = this.countDownDate - this.now;
@@ -187,10 +191,16 @@ export class TheLastResort {
         let time = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
         document.getElementById("timer-value").innerHTML = time;
 
-        if (this.timeleft > 0) {
-            setTimeout(() => this.updateTimer(), 1000);
-        } else {
+        // Check if the timer has finished
+        if (this.timeleft <= 0) {
             document.getElementById("timer-value").innerHTML = "00:00";
+            this.stopTimer();  // Stop the timer when it reaches 0
         }
     }
+
+    // Stop Timer
+    stopTimer() {
+        clearInterval(this.timerInterval);  // Clear the interval to stop the timer
+    }
+
 }

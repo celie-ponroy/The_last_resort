@@ -9,7 +9,7 @@ let quest2 = new Quest("Réparer l'aile gauche",["modify hello = true","run celi
 
 theLastResort.addQuest(quest1);
 theLastResort.addQuest(quest2)
-
+/*
 //default values
 theLastResort.executeCmd("modify hello = true");
 
@@ -25,7 +25,7 @@ theLastResort.executeCmd('ls');
 
 theLastResort.executeCmd('cd ..');
 
-theLastResort.executeCmd('ls');
+theLastResort.executeCmd('ls');*/
 /*
 const form = document.getElementById('user-form');
 const userInput = document.getElementById('user-input');
