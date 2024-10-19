@@ -44,6 +44,8 @@ export class TheLastResort {
                 this.addResultToUI(res);
                 break;
         }
+        //updateStatus();
+
     }
     updateCurrent() {
         let i = 0;
@@ -54,6 +56,16 @@ export class TheLastResort {
         }
         this.current = i;
     }
+/*
+    updateStatus(){
+        for(let i = 0; i < this.commands.length ; i++){
+            if(this.quests[i].getFinished() == false){
+                return;
+            }
+        }
+        finish();
+    }*/
+
     addcommandToUI(command) {
         const ulElement = document.querySelector('.screen ul');
 
@@ -71,6 +83,17 @@ export class TheLastResort {
         newListItem.textContent = command;
         ulElement.appendChild(newListItem);
     }
+/*
+    finish(){
+        const ulElement = document.querySelector('quests');
+
+        // Ajouter un nouvel élément à la fin de la liste
+        const newListItem = document.createElement('p');
+        newListItem.textContent = "Well done you saved the earth!!";
+        ulElement.appendChild(newListItem);
+    }
+
+    */
 
 
 }
