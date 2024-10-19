@@ -7,7 +7,7 @@ let quest1 = new Quest(["modify hello = true","run repairElectricalSystems.sh"])
  
 theLastResort.addQuest(quest1);
 /*
-default values
+//default values
 theLastResort.executeCmd("modify hello = true");
 theLastResort.executeCmd("run celie.sh");
 

@@ -57,6 +57,9 @@ export class TheLastResort {
                 this.quests[this.current].checkScript(string)
                 this.addResultToUI(res);
                 break;
+            case "clear":
+                this.replaceUI();
+            break;
         }
         this.updateStatus();
 
@@ -97,13 +100,15 @@ export class TheLastResort {
         newItem.textContent = command;
         ulElement.appendChild(newItem);
     }
-
-    finish() {
-        //stopper le timer TODO
+    replaceUI(string=""){
         const ulElement = document.querySelector('.screen ul');
         const finishText = document.createElement('p');
-        finishText.textContent = 'Well done you saved the earth!!';
+        finishText.textContent = string;
         ulElement.replaceChildren(finishText);
+    }
+    finish() {
+        //stopper le timer TODO
+        this.replaceUI('Well done you saved the earth!!');
     }
 
 
