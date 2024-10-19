@@ -131,6 +131,21 @@ body .container .computer .screen ul::-webkit-scrollbar-thumb:hover {
   background: #0a0;
   /* Couleur au survol */
 }
+body .container .computer .screen form #editable-textarea {
+  margin-top: 1em;
+  display: none;
+  height: 85%;
+  font-size: 1em;
+}
+body .container .computer .screen form #save-button {
+  display: none;
+  margin-top: 1em;
+  border: 0.2em #0c0 solid;
+}
+body .container .computer .screen form #save-button:hover {
+  color: black;
+  background-color: #0c0;
+}
 body .container .computer .screen form input,
 body .container .computer .screen form textarea,
 body .container .computer .screen form button {
