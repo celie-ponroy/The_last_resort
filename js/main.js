@@ -18,3 +18,14 @@ console.log("finished "+quest1.finished);
 
 theLastResort.executeCmd('ls');
 
+theLastResort.executeCmd('cd Documents');
+
+theLastResort.executeCmd('ls');
+
+theLastResort.executeCmd('cd ..');
+
+theLastResort.executeCmd('ls');
+
+
+
+
