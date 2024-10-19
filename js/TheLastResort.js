@@ -1,5 +1,5 @@
 'use strict'
-import { Script, Nano, Liste } from "./Commands.js";
+import { Script, Nano, Liste, Cd } from "./Commands.js";
 
 import { main_directory } from "./Arborescence.js";
 
@@ -10,6 +10,9 @@ export class TheLastResort {
         this.current = 0;
         this.quests = [];
     }
+
+
+
     addQuest(quest) {//=random 
         this.updateCurrent()
         this.quests.push(quest);
@@ -33,7 +36,17 @@ export class TheLastResort {
 
             case "ls":
                 //script
-                this.addResultToUI(new Liste().execute(main_directory.dir_array));
+
+                this.addcommandToUI(new Liste().execute(this.current_dir.dir_array));
+
+                console.log("ls de : " + this.current_dir.dir_array);
+                break;
+
+            case "cd":
+                //script
+                this.current_dir = new Cd().execute(command[1], this.current_dir);
+
+                console.log('current dir tttttttttt' + new Cd().execute(command[1], this.current_dir));
                 break;
 
             case "run":
@@ -78,7 +91,7 @@ export class TheLastResort {
         newListItem.textContent = command;
         ulElement.appendChild(newListItem);
     }
-    
+
     addResultToUI(command) {
         const ulElement = document.querySelector('.screen ul');
 
