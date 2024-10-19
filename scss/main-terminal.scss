@@ -18,7 +18,6 @@ body {
         display: grid;
 
         grid-template-columns: 3fr 1fr 1fr;
-        grid-auto-rows: 1fr;
 
         .computer {
             border: 8mm ridge rgba(249, 253, 170, 0.6);
@@ -164,6 +163,13 @@ body {
             }
 
         }
+    }
+
+    .desk {
+        width: 100%;
+        height: 12em;
+        background-color: rgb(51, 19, 19);
+        background-image: url('../img/Dust.png');
     }
 }
 
