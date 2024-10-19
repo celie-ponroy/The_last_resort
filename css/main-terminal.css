@@ -195,22 +195,34 @@ body .container .timer h1 {
   text-shadow: red 2px 0 10px;
   padding: 0.2em;
 }
-body .container .quests {
-  transform: rotate(-2deg);
-  background-color: rgb(250, 240, 0);
-  z-index: 2;
-  position: absolute;
-  border-radius: 2px;
-  top: 15em;
-  left: 40em;
-  box-shadow: 0 0em 100em #000;
-  width: max-content;
-  aspect-ratio: 1/1;
+body .container .post-it {
+  z-index: 1111;
   grid-column: 1;
-  grid-row: 1;
+  position: absolute;
+  background-color: yellow;
+  box-shadow: 0 0em 100em #000;
+  font-family: "Playwrite GB S", bold;
+  width: 10em;
+  height: 10em;
+  padding: 10px;
+  border-radius: 2px;
+  top: 40em;
+  left: 45em;
+  transform: rotate(-3deg);
+}
+body .container .quests {
+  margin-top: 2em;
+  border: 0.5em ridge rgb(182, 174, 174);
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+  border-radius: 8px;
+  grid-column: 2/-1;
+  width: 30em;
+  height: 15em;
+  box-shadow: 0 0em 100em #000;
   font-family: "Playwrite GB S", bold;
   font-size: 1.2em;
-  padding: 10px;
+  padding: 40px;
 }
 body .container ul.list {
   display: grid;
@@ -223,6 +235,7 @@ body .container ul.list li {
   flex-direction: row;
   text-align: center;
   align-items: center;
+  color: blue;
 }
 body .container ul.list li div {
   margin-right: 0.4em;
@@ -316,7 +329,7 @@ body .desk {
   height: var(--checkbox-height);
   width: var(--checkbox-height);
   background-color: transparent;
-  border: calc(var(--checkbox-height) * 0.1) solid #000;
+  border: calc(var(--checkbox-height) * 0.1) solid blue;
   border-radius: 5px;
   position: relative;
   display: inline-block;
@@ -338,7 +351,7 @@ body .desk {
   position: absolute;
   height: 0;
   width: calc(var(--checkbox-height) * 0.15);
-  background-color: #000;
+  background-color: blue;
   display: inline-block;
   -moz-transform-origin: left top;
   -ms-transform-origin: left top;
@@ -375,7 +388,7 @@ body .desk {
 
 .checkbox-wrapper-19 input[type=checkbox]:checked + .check-box,
 .checkbox-wrapper-19 .check-box.checked {
-  border-color: #000;
+  border-color: blue;
 }
 
 .checkbox-wrapper-19 input[type=checkbox]:checked + .check-box::after,

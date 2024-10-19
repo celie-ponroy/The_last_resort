@@ -1,5 +1,5 @@
 'use strict'
-import { Script, Edit, Liste, Cd } from "./Commands.js";
+import { Script, Edit, Liste, Cd, Create } from "./Commands.js";
 
 import { main_directory } from "./Arborescence.js";
 
@@ -44,6 +44,11 @@ export class TheLastResort {
                     this.clearPrompt();
 
                     break;
+                case 'create':
+                    new Create().execute(command[1], this.current_dir);
+                    this.clearPrompt();
+
+                    break;
 
                 case "ls":
                     //script
@@ -53,14 +58,17 @@ export class TheLastResort {
                     break;
 
                 case "cd":
-                        //cd
-                        let cd = new Cd();
-                        let new_current_dir = cd.execute(command[1], this.current_dir);
-                        if(new_current_dir==null)
-                            this.addResultToUI("Something whent wrong :(");
-                        else
-                            this.current_dir = new_current_dir;
-                        break;
+                    //cd
+                    let cd = new Cd();
+                    let new_current_dir = cd.execute(command[1], this.current_dir);
+                    if (new_current_dir == null)
+                        this.addResultToUI("Something whent wrong :(");
+                    else
+                        this.current_dir = new_current_dir;
+                    this.clearPrompt();
+
+                    break;
+
 
                 case "run":
                     //script
@@ -72,8 +80,8 @@ export class TheLastResort {
 
                     break;
                 case "clear":
-                this.replaceUI();
-                break;
+                    this.replaceUI();
+                    break;
             }
         } else {
             this.current_file.editFile(editabletextarea.value);
@@ -90,7 +98,7 @@ export class TheLastResort {
         this.updateCurrent();
         this.updateQuestUI();
         this.updateStatus();
-       
+
 
 
     }
@@ -136,12 +144,31 @@ export class TheLastResort {
         finishText.textContent = string;
         ulElement.replaceChildren(finishText);
     }
-    initNameQuestsUI(quest){
+    nameQuestsUI() {
+
+        let questElements = document.getElementById('list-quest');
+        console.log("questElements" + questElements);
+        let i = 0;
+        this.quests.forEach(quest => {
+
+            let li = document.createElement('li');
+            console.log("li ; " + li);
+            li.innerHTML = `
+                <div class="checkbox-wrapper-19">
+                    <input type="checkbox" id="${i + 1}" />
+                    <label for="${i + 1}" class="check-box"></label>
+                </div>
+                ${quest.name}`;
+            questElements.appendChild(li);
+            i++;
+        });
+    }
+    initNameQuestsUI(quest) {
         let i = this.quests.length;
         let questElements = document.getElementById('list-quest');
 
         let li = document.createElement('li');
-        console.log("li ; "+li);
+        console.log("li ; " + li);
         li.innerHTML = `
             <div class="checkbox-wrapper-19">
                 <input type="checkbox" id="${i}" disabled />
@@ -151,11 +178,11 @@ export class TheLastResort {
         questElements.appendChild(li);
     }
 
-    updateQuestUI(){
-        for(let index = 0;index<this.quests.length;index++){
-            let checkbox = document.getElementById(index+1);
+    updateQuestUI() {
+        for (let index = 0; index < this.quests.length; index++) {
+            let checkbox = document.getElementById(index + 1);
             checkbox.checked = this.quests[index].getFinished();
-        }        
+        }
     }
 
     finish() {

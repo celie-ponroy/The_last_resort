@@ -1,7 +1,7 @@
 'use strict';
 
 
-class Directory {
+export class Directory {
 
     constructor(dir_name, dir_parent) {
         this.dir_name = dir_name;
@@ -53,7 +53,7 @@ class Directory {
 
 }
 
-class File {
+export class File {
 
     constructor(file_name) {
         this.file_name = file_name;
@@ -75,7 +75,7 @@ class File {
 
 
 
-
+//arborescence statique
 export const main_directory = new Directory('User', null);
 
 main_directory.addToDirectory(new Directory('Downloads', main_directory));
