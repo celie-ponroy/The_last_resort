@@ -4,9 +4,6 @@ export class Quest{
 
     constructor(commandsParam=[]){
         this.finished = false;
-        //this.commands = new Array();
-        //list string 
-        //list bool
         this.executed = [];
         for (let i = 0; i < commandsParam.length ; i++){
             this.executed[i] = false; // at first nothing is executed
@@ -15,17 +12,6 @@ export class Quest{
 
 
     }
-
-    /*addCommand(command){
-        this.commands.push(command);
-    }*/
-   /*
-    executeCmd(string){
-        if(!this.finished){
-            let i = this.getCurrent();
-            this.commands[i].execute(string);
-        }
-    }*/
 
     getFinished(){
         return this.finished;
@@ -51,28 +37,33 @@ export class Quest{
         this.finished = true;
     }
 
-    /*checkVar(string){
-        let string1 = new String(string).replace(/\s+/g, ' ').trim();
-        let cmdCur =  new String(this.commands[this.getCurrent()]);
-        let string2 =cmdCur.replace(/\s+/g, ' ').trim();
-        console.log("list commnades "+ this.commands);
-        console.log("cmdCur" + cmdCur);
-        console.log("listString" + string);
-        if(string1== string2){
-            return true;
+    checkVar(string) {
+    let equal = this.compareCommands(string)
+    if(equal){
+        this.executed[this.getCurrent()]= true;
+        this.updateStatus();
+    }
+    
+    return equal;
+    }
+
+    checkScript(command){
+        let equal = this.compareCommands(command);
+        console.log("equal : "+equal);
+        if(equal){
+            this.executed[this.getCurrent()]= true;
+            this.updateStatus();
         }
-        return false;
-    }*/
-        checkVar(string) {
-            let string1 = string.replace(/\s+/g, ' ').trim();
-            let cmdCur = this.commands[this.getCurrent()];
-            let string2 = cmdCur.replace(/\s+/g, ' ').trim();
-            if(string1 === string2){
-                this.executed[this.getCurrent()]= true;
-                this.updateStatus();
-            }
-            
-            return string1 === string2;
-        }
+    
+        return equal;
+    }
+
+    compareCommands(string){
+        let string1 = string.replace(/\s+/g, ' ').trim();
+        let cmdCur = this.commands[this.getCurrent()];
+        let string2 = cmdCur.replace(/\s+/g, ' ').trim();
+
+        return string1 === string2;
+    }
         
 }

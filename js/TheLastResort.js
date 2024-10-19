@@ -33,24 +33,17 @@ export class TheLastResort {
 
             case "ls":
                 //script
-                this.addcommandToUI(new Liste().execute(main_directory.dir_array));
+                this.addResultToUI(new Liste().execute(main_directory.dir_array));
                 break;
 
             case "run":
                 //script
                 let script = new Script();
                 let res = script.execute(string);
-                console.log(res);
-                this.addcommandToUI(res);
+                this.quests[this.current].checkScript(string)
+                this.addResultToUI(res);
                 break;
         }
-
-
-        /*console.log(this.quests);
-        console.log(this.current);
-        this.quests[this.current].executeCmd(string);
-        this.updateCurrent();*/
-
     }
     updateCurrent() {
         let i = 0;
@@ -66,6 +59,15 @@ export class TheLastResort {
 
         // Ajouter un nouvel élément à la fin de la liste
         const newListItem = document.createElement('li');
+        newListItem.textContent = command;
+        ulElement.appendChild(newListItem);
+    }
+    
+    addResultToUI(command) {
+        const ulElement = document.querySelector('.screen ul');
+
+        // Ajouter un nouvel élément à la fin de la liste
+        const newListItem = document.createElement('p');
         newListItem.textContent = command;
         ulElement.appendChild(newListItem);
     }
