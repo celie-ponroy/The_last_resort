@@ -18,8 +18,6 @@ export class TheLastResort {
 
     }
 
-
-
     addQuest(quest) {
         this.updateCurrent();
         this.quests.push(quest);
@@ -146,7 +144,7 @@ export class TheLastResort {
         console.log("li ; "+li);
         li.innerHTML = `
             <div class="checkbox-wrapper-19">
-                <input type="checkbox" id="${i}" />
+                <input type="checkbox" id="${i}" disabled />
                 <label for="${i}" class="check-box"></label>
             </div>
             ${quest.name}`;
