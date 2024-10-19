@@ -15,26 +15,22 @@ export class TheLastResort {
         this.countDownDate = 0;
         this.timeleft = 0;
         this.initTimer(5);
-        this.nameQuestsUI();
 
     }
 
 
 
     addQuest(quest) {
-        this.updateCurrent()
+        this.updateCurrent();
         this.quests.push(quest);
+        this.nameQuestsUI();
     }
     executeCmd(string = "") {
         // split par espace
         //ex overlay = true => ["overlay","=","true"]
         let editabletextarea = document.getElementById('editable-textarea');
 
-        console.log('je ne sais pas : ' + editabletextarea.style.display)
         if (editabletextarea.style.display !== 'block') {
-
-
-
             this.addcommandToUI(string);
             let command = string.split(' ');
             switch (command[0]) {
@@ -82,27 +78,21 @@ export class TheLastResort {
                 break;
             }
         } else {
-
-            console.log('sexyboy');
-
             this.current_file.editFile(editabletextarea.value);
-
             editabletextarea.value = "";
-
             editabletextarea.style.display = "none";
-
             document.getElementById('user-input').style.display = "";
             document.getElementById('user-input').value = "";
-
             document.getElementById('save-button').style.display = "none";
             const label = document.querySelector('label[for="user-input"]');
-
             label.textContent = '';
-
             document.getElementById('scrollable-list').style.display = "block";
 
         }
+        this.nameQuestsUI();
         this.updateStatus();
+       
+
 
     }
 
@@ -150,23 +140,12 @@ export class TheLastResort {
     nameQuestsUI(){
 
         let questElements = document.getElementById('list-quest');
+        console.log("questElements"+questElements);
         let i = 0;
         this.quests.forEach(quest => {
+            
             let li = document.createElement('li');
-            //let div = document.createElement('div');
-            //div.className = "checkbox-wrapper-19";
-            /*
-            let input = document.createElement('input');
-            input.type = "checkbox";
-            input.id = `${index + 1}`;
-            let label = document.createElement('label');
-            label.for = `${index + 1}`;
-            input.appendChild(label);
-            div.appendChild(input);
-            div.innerHTML = `
-                    <input type="checkbox" id="${i + 1}" />
-                    <label for="${i + 1}" class="check-box"></label>
-                ${quest.name}`;*/
+            console.log("li ; "+li);
             li.innerHTML = `
                 <div class="checkbox-wrapper-19">
                     <input type="checkbox" id="${i + 1}" />

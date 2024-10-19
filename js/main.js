@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        console.log('testtttttt');
         const inputValue = userInput.value;
         theLastResort.executeCmd(inputValue);
     });
