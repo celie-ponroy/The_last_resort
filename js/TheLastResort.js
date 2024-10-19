@@ -9,6 +9,12 @@ export class TheLastResort {
         this.current_dir = main_directory;
         this.current = 0;
         this.quests = [];
+        this.now = 0;
+        this.initial = 0;
+        this.countDownDate = 0;
+        this.timeleft = 0;
+        this.initTimer(5);
+       
     }
 
 
@@ -110,7 +116,28 @@ export class TheLastResort {
         //stopper le timer TODO
         this.replaceUI('Well done you saved the earth!!');
     }
+    // Timer
+    initTimer(timeinitial) {
+        this.timeinitial = timeinitial;
+        this.now = new Date().getTime();
+        this.countDownDate = this.now + this.timeinitial * 60000; 
+        this.updateTimer();  
+    }
 
+    updateTimer() {
+        this.now = new Date().getTime(); 
+        this.timeleft = this.countDownDate - this.now;
 
+        let minutes = Math.floor((this.timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((this.timeleft % (1000 * 60)) / 1000);
 
+        let time = `${minutes< 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        document.getElementById("timer-value").innerHTML = time;
+
+        if (this.timeleft > 0) {
+            setTimeout(() => this.updateTimer(), 1000);
+        } else {
+            document.getElementById("timer-value").innerHTML = "00:00";
+        }
+    }
 }
