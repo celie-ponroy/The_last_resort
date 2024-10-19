@@ -164,6 +164,25 @@ body {
                 }
 
                 form {
+                    #editable-textarea {
+                        margin-top: 1em;
+                        display: none;
+                        height: 85%;
+                        font-size: 1em;
+                    }
+
+                    #save-button {
+                        display: none;
+                        margin-top: 1em;
+                        border: 0.2em $color_text_screen solid;
+
+                        &:hover {
+                            color: black;
+                            background-color: #0c0;
+                        }
+                    }
+
+
 
                     input,
                     textarea,

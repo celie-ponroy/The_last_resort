@@ -1,5 +1,5 @@
 'use strict'
-import { Script, Nano, Liste, Cd } from "./Commands.js";
+import { Script, Edit, Liste, Cd } from "./Commands.js";
 
 import { main_directory } from "./Arborescence.js";
 
@@ -7,6 +7,7 @@ import { main_directory } from "./Arborescence.js";
 export class TheLastResort {
     constructor() {
         this.current_dir = main_directory;
+        this.current_file = '';
         this.current = 0;
         this.quests = [];
     }
@@ -20,39 +21,75 @@ export class TheLastResort {
     executeCmd(string = "") {
         // split par espace
         //ex overlay = true => ["overlay","=","true"]
+        let editabletextarea = document.getElementById('editable-textarea');
 
-        this.addcommandToUI(string);
-        let command = string.split(' ');
-        switch (command[0]) {
-            case "nano":
-                //classe nano et execution
-                new Nano().execute(string);//rajouter fichiers
-                break;
-            case "modify":
-                //verifier que le string est bien
-                //checkvar
-                this.quests[this.current].checkVar(string);
-                break;
+        console.log('je ne sais pas : ' + editabletextarea.style.display)
+        if (editabletextarea.style.display !== 'block') {
 
-            case "ls":
-                //script
+            console.log('sexylady');
 
-                this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
-                break;
+            this.addcommandToUI(string);
+            let command = string.split(' ');
+            switch (command[0]) {
+                case "edit":
+                    //classe nano et execution
+                    this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
 
-            case "cd":
-                //script
-                this.current_dir = new Cd().execute(command[1], this.current_dir);
+                    break;
+                case "modify":
+                    //verifier que le string est bien
+                    //checkvar
+                    this.quests[this.current].checkVar(string);
+                    this.clearPrompt();
 
-                break;
+                    break;
 
-            case "run":
-                //script
-                let script = new Script();
-                let res = script.execute(string);
-                this.quests[this.current].checkScript(string)
-                this.addResultToUI(res);
-                break;
+                case "ls":
+                    //script
+
+                    this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
+                    this.clearPrompt();
+                    break;
+
+                case "cd":
+                    //script
+                    this.current_dir = new Cd().execute(command[1], this.current_dir);
+                    this.clearPrompt();
+
+                    break;
+
+                case "run":
+                    //script
+                    let script = new Script();
+                    let res = script.execute(string);
+                    this.quests[this.current].checkScript(string)
+                    this.addResultToUI(res);
+                    this.clearPrompt();
+
+                    break;
+            }
+        } else {
+
+            console.log('sexyboy');
+
+            this.current_file.editFile(editabletextarea.value);
+
+            editabletextarea.value = "";
+
+            editabletextarea.style.display = "none";
+
+            document.getElementById('user-input').style.display = "";
+            document.getElementById('user-input').value = "";
+
+            document.getElementById('save-button').style.display = "none";
+            const label = document.querySelector('label[for="user-input"]');
+
+            label.textContent = '';
+
+            document.getElementById('scrollable-list').style.display = "block";
+
+
+
         }
         this.updateStatus();
 
@@ -100,6 +137,11 @@ export class TheLastResort {
         const finishText = document.createElement('p');
         finishText.textContent = 'Well done you saved the earth!!';
         ulElement.replaceChildren(finishText);
+    }
+
+    clearPrompt() {
+        const form = document.querySelector('#user-form');
+        form.reset();
     }
 
 

@@ -3,8 +3,8 @@ import { Quest } from "./Quest.js";
 import { TheLastResort } from "./TheLastResort.js";
 
 let theLastResort = new TheLastResort();
-let quest1 = new Quest(["modify hello = true","run repairElectricalSystems.sh"])
- 
+let quest1 = new Quest(["modify hello = true", "run repairElectricalSystems.sh"])
+
 theLastResort.addQuest(quest1);
 /*
 default values
@@ -30,17 +30,22 @@ form.addEventListener('submit', (event) => {
     theLastResort.executeCmd(inputValue);
  });
 */
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#user-form');
     const userInput = document.querySelector('#user-input');
 
+
+    //cmd
     form.addEventListener('submit', (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
+
+        console.log('testtttttt');
         const inputValue = userInput.value;
         theLastResort.executeCmd(inputValue);
-        form.reset();
     });
+
+    //save file
 });
-
-
-
