@@ -2,7 +2,8 @@
 
 export class Quest{
 
-    constructor(commandsParam=[]){
+    constructor(name="Quest",commandsParam=[]){
+        this.name = name;
         this.finished = false;
         this.executed = [];
         for (let i = 0; i < commandsParam.length ; i++){

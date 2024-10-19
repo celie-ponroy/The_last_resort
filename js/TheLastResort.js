@@ -14,6 +14,7 @@ export class TheLastResort {
         this.countDownDate = 0;
         this.timeleft = 0;
         this.initTimer(5);
+        this.nameQuestsUI();
        
     }
 
@@ -111,6 +112,37 @@ export class TheLastResort {
         const finishText = document.createElement('p');
         finishText.textContent = string;
         ulElement.replaceChildren(finishText);
+    }
+    nameQuestsUI(){
+
+        let questElements = document.getElementById('list-quest');
+        let i = 0;
+        this.quests.forEach(quest => {
+            let li = document.createElement('li');
+            //let div = document.createElement('div');
+            //div.className = "checkbox-wrapper-19";
+            /*
+            let input = document.createElement('input');
+            input.type = "checkbox";
+            input.id = `${index + 1}`;
+            let label = document.createElement('label');
+            label.for = `${index + 1}`;
+            input.appendChild(label);
+            div.appendChild(input);
+            div.innerHTML = `
+                    <input type="checkbox" id="${i + 1}" />
+                    <label for="${i + 1}" class="check-box"></label>
+                ${quest.name}`;*/
+            li.innerHTML = `
+                <div class="checkbox-wrapper-19">
+                    <input type="checkbox" id="${i + 1}" />
+                    <label for="${i + 1}" class="check-box"></label>
+                </div>
+                ${quest.name}`;
+            questElements.appendChild(li);
+            i++;
+        });
+        
     }
     finish() {
         //stopper le timer TODO

@@ -3,7 +3,7 @@ import { Quest } from "./Quest.js";
 import { TheLastResort } from "./TheLastResort.js";
 
 let theLastResort = new TheLastResort();
-let quest1 = new Quest(["modify hello = true","run repairElectricalSystems.sh"])
+let quest1 = new Quest("Réparer l'aile droite",["modify hello = true","run repairElectricalSystems.sh"])
  
 theLastResort.addQuest(quest1);
 /*
