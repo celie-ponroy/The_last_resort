@@ -13,16 +13,16 @@
     <div class="container">
         <div class="computer">
             <div class="screen">
+                <ul id="scrollable-list">
 
-                <ul>
+
                 </ul>
 
                 <form>
                     <label for="user-input"></label>
-                    <input type="text" autocomplete="off" id=" user-input" name="user-input">
+                    <input type="text" autocomplete="off" id="user-input" name="user-input">
                 </form>
             </div>
-
         </div>
 
         <div class="screen_foot"><img src="../img/screen_foot.svg"></div>
@@ -36,44 +36,50 @@
                 <li>
                     <div class="checkbox-wrapper-19">
                         <input type="checkbox" id="1" />
-                        <label for="1" class="check-box">
+                        <label for="1" class="check-box"></label>
                     </div>Quest
                 </li>
                 <li>
                     <div class="checkbox-wrapper-19">
                         <input type="checkbox" id="2" />
-                        <label for="2" class="check-box">
+                        <label for="2" class="check-box"></label>
                     </div>Quest
                 </li>
                 <li>
                     <div class="checkbox-wrapper-19">
                         <input type="checkbox" id="3" />
-                        <label for="3" class="check-box">
+                        <label for="3" class="check-box"></label>
                     </div>Quest
                 </li>
                 <li>
                     <div class="checkbox-wrapper-19">
                         <input type="checkbox" id="4" />
-                        <label for="4" class="check-box">
+                        <label for="4" class="check-box"></label>
                     </div>Quest
                 </li>
                 <li>
                     <div class="checkbox-wrapper-19">
                         <input type="checkbox" id="5" />
-                        <label for="5" class="check-box">
+                        <label for="5" class="check-box"></label>
                     </div>Quest
                 </li>
-
-
-
             </ul>
         </div>
-
     </div>
-    <div class="desk">
-    </div>
+    <div class="desk"></div>
 
-    <script type="module" src="../js/main.js"></script>
+    <script>
+        // Fonction pour faire défiler le <ul> vers le bas
+        function scrollToBottom() {
+            const list = document.getElementById('scrollable-list');
+            list.scrollTop = list.scrollHeight; // Définit la position de défilement au bas du conteneur
+        }
+
+        // Appeler la fonction au chargement de la page
+        window.onload = function () {
+            scrollToBottom(); // Défiler au bas au chargement
+        };
+    </script>
 
 </body>
 
