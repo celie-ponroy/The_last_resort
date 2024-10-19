@@ -89,7 +89,8 @@ export class TheLastResort {
             document.getElementById('scrollable-list').style.display = "block";
 
         }
-        this.nameQuestsUI();
+        this.updateCurrent();
+        this.updateQuestUI();
         this.updateStatus();
        
 
@@ -150,8 +151,14 @@ export class TheLastResort {
             </div>
             ${quest.name}`;
         questElements.appendChild(li);
-        i++;
     }
+    updateQuestUI(){
+        for(let index = 0;index<this.quests.length;index++){
+            let checkbox = document.getElementById('1');
+            checkbox.checked = !this.quests[index].getFinished();
+        }        
+    }
+
     finish() {
         //stopper le timer TODO
         this.replaceUI('Well done you saved the earth!!');
