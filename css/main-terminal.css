@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap");
 * {
   margin: 0em;
   padding: 0em;
@@ -15,23 +16,40 @@ ol {
   src: url("../fonts/digital-7.ttf");
 }
 body {
-  background-color: darkslategrey;
+  background-color: rgb(45, 66, 66);
+  overflow: hidden;
+  user-select: none;
+  /* Désactive la sélection */
+  -webkit-user-select: none;
+  /* Désactiver pour Safari/Chrome */
+  -moz-user-select: none;
+  /* Désactiver pour Firefox */
+  -ms-user-select: none;
+  /* Désactiver pour Internet Explorer */
 }
 body .container {
+  position: relative;
   margin: 3em;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
 }
 body .container .computer {
-  border: 8mm ridge rgba(249, 253, 170, 0.6);
-  border-radius: 8px;
-  width: 55em;
-  height: 45em;
+  z-index: 1;
+  position: relative;
+  top: 2em;
+  left: 4em;
+  border: 16mm ridge rgb(152, 155, 106);
+  border-radius: 4px;
+  width: 45em;
+  height: 35em;
   grid-row: 1/6;
+  box-shadow: 0 0em 100em #000;
 }
 body .container .computer .screen {
+  border: 3px rgba(0, 0, 0, 0.507) solid;
+  border-radius: 8px;
   height: 100%;
-  font-size: 3em;
+  font-size: 1.5em;
   font-family: "Cascadia Code", sans-serif;
   color: #0c0;
   text-shadow: #0c0 1px 0 5px;
@@ -43,6 +61,10 @@ body .container .computer .screen {
   /* Limiter les animations à l'intérieur de .screen */
   position: relative;
   /* Pour s'assurer que les pseudo-éléments sont contenus à l'intérieur */
+}
+body .container .computer .screen:hover {
+  cursor: url("../img/selector_cursor.svg"), pointer;
+  z-index: 1;
 }
 body .container .computer .screen:before {
   animation: wave 10s infinite ease-in-out;
@@ -83,6 +105,7 @@ body .container .computer .screen ul li::before {
 body .container .computer .screen form input,
 body .container .computer .screen form textarea,
 body .container .computer .screen form button {
+  width: 95%;
   background-color: transparent;
   border: none;
   animation: colorPulse 5s infinite ease-in-out;
@@ -90,6 +113,12 @@ body .container .computer .screen form button {
   border-radius: 5px;
   color: #0c0;
   text-shadow: #0c0 1px 0 5px;
+}
+body .container .computer .screen form input:hover,
+body .container .computer .screen form textarea:hover,
+body .container .computer .screen form button:hover {
+  cursor: url("../img/selector_cursor.svg"), pointer;
+  z-index: 1;
 }
 body .container .computer .screen form input:focus,
 body .container .computer .screen form textarea:focus,
@@ -99,7 +128,15 @@ body .container .computer .screen form button:focus {
 body .container .computer .screen form::before {
   content: ">";
 }
+body .container .screen_foot {
+  filter: drop-shadow(5px 5px 1px rgba(0, 0, 0, 0.5));
+  z-index: 0;
+  position: absolute;
+  top: 30em;
+  left: 13em;
+}
 body .container .timer {
+  box-shadow: 0 0em 100em #000;
   background-color: #222;
   border: 8mm ridge rgb(0, 0, 0);
   border-radius: 4px;
@@ -111,31 +148,45 @@ body .container .timer {
   font-size: 4em;
 }
 body .container .timer h1 {
+  text-shadow: red 2px 0 10px;
   padding: 0.2em;
 }
 body .container .quests {
-  grid-column: 2/-1;
-  grid-row: span 4;
-}
-body .container .quests ul.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
-  /* Colonnes flexibles qui s'adaptent */
-  gap: 10px;
-  /* Espacement entre les éléments */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-body .container .quests ul.list li {
-  background: #ddd;
+  transform: rotate(-2deg);
+  background-color: rgb(250, 240, 0);
+  z-index: 2;
+  position: absolute;
+  border-radius: 2px;
+  top: 15em;
+  left: 40em;
+  box-shadow: 0 0em 100em #000;
+  width: max-content;
+  aspect-ratio: 1/1;
+  grid-column: 1;
+  grid-row: 1;
+  font-family: "Playwrite GB S", bold;
+  font-size: 1.2em;
   padding: 10px;
-  border-radius: 5px;
+}
+body .container ul.list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Deux colonnes fixes */
+  gap: 10px;
+}
+body .container ul.list li {
+  display: flex;
+  flex-direction: row;
   text-align: center;
+  align-items: center;
+}
+body .container ul.list li div {
+  margin-right: 0.4em;
 }
 body .desk {
   width: 100%;
-  height: 12em;
+  height: 9em;
+  box-shadow: 20em 0 200em #000;
   background-color: rgb(51, 19, 19);
   background-image: url("../img/Dust.png");
 }
@@ -151,19 +202,169 @@ body .desk {
     color: #060;
   }
 }
+.checkbox-wrapper-19 {
+  box-sizing: border-box;
+  --checkbox-height: 25px;
+}
+
+@-moz-keyframes dothabottomcheck-19 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) / 2);
+  }
+}
+@-webkit-keyframes dothabottomcheck-19 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) / 2);
+  }
+}
+@keyframes dothabottomcheck-19 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) / 2);
+  }
+}
+@keyframes dothatopcheck-19 {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) * 1.2);
+  }
+}
+@-webkit-keyframes dothatopcheck-19 {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) * 1.2);
+  }
+}
+@-moz-keyframes dothatopcheck-19 {
+  0% {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  100% {
+    height: calc(var(--checkbox-height) * 1.2);
+  }
+}
+.checkbox-wrapper-19 input[type=checkbox] {
+  display: none;
+}
+
+.checkbox-wrapper-19 .check-box {
+  height: var(--checkbox-height);
+  width: var(--checkbox-height);
+  background-color: transparent;
+  border: calc(var(--checkbox-height) * 0.1) solid #000;
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: border-color ease 0.2s;
+  -o-transition: border-color ease 0.2s;
+  -webkit-transition: border-color ease 0.2s;
+  transition: border-color ease 0.2s;
+  cursor: pointer;
+}
+
+.checkbox-wrapper-19 .check-box::before,
+.checkbox-wrapper-19 .check-box::after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  height: 0;
+  width: calc(var(--checkbox-height) * 0.15);
+  background-color: #000;
+  display: inline-block;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  border-radius: 5px;
+  content: " ";
+  -webkit-transition: opacity ease 0.5;
+  -moz-transition: opacity ease 0.5;
+  transition: opacity ease 0.5;
+}
+
+.checkbox-wrapper-19 .check-box::before {
+  top: calc(var(--checkbox-height) * 0.72);
+  left: calc(var(--checkbox-height) * 0.41);
+  box-shadow: 0 0 0 calc(var(--checkbox-height) * 0.05) var(--background-color);
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.checkbox-wrapper-19 .check-box::after {
+  top: calc(var(--checkbox-height) * 0.37);
+  left: calc(var(--checkbox-height) * 0.05);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.checkbox-wrapper-19 input[type=checkbox]:checked + .check-box,
+.checkbox-wrapper-19 .check-box.checked {
+  border-color: #000;
+}
+
+.checkbox-wrapper-19 input[type=checkbox]:checked + .check-box::after,
+.checkbox-wrapper-19 .check-box.checked::after {
+  height: calc(var(--checkbox-height) / 2);
+  -moz-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+  -o-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+  -webkit-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+  animation: dothabottomcheck-19 0.2s ease 0s forwards;
+}
+
+.checkbox-wrapper-19 input[type=checkbox]:checked + .check-box::before,
+.checkbox-wrapper-19 .check-box.checked::before {
+  height: calc(var(--checkbox-height) * 1.2);
+  -moz-animation: dothatopcheck-19 0.4s ease 0s forwards;
+  -o-animation: dothatopcheck-19 0.4s ease 0s forwards;
+  -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
+  animation: dothatopcheck-19 0.4s ease 0s forwards;
+}
+
 @keyframes wave {
   0% {
-    box-shadow: 0 -5vh 5vh #0c0;
+    box-shadow: 0 -5vh 5vh #000;
     top: -100vh;
   }
   48%, 52% {
-    box-shadow: 0 -5vh 5vh #090;
+    box-shadow: 0 -5vh 5vh #000;
   }
   50% {
-    box-shadow: 0 -5vh 5vh #060;
+    box-shadow: 0 -5vh 5vh #000;
   }
   100% {
-    box-shadow: 0 -5vh 5vh #0c0;
+    box-shadow: 0 -5vh 5vh #000;
     top: 100vh;
   }
 }

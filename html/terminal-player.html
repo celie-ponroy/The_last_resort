@@ -30,17 +30,46 @@
 
         </div>
 
+        <div class="screen_foot"><img src="../img/screen_foot.svg"></div>
+
         <div class="timer">
-            <h1>5:29</h1>
+            <h1>05:29</h1>
         </div>
 
         <div class="quests">
             <ul class="list">
-                <li>Quest 1</li>
-                <li>Quest 2</li>
-                <li>Quest 3</li>
-                <li>Quest 4</li>
-                <li>Quest 5</li>
+                <li>
+                    <div class="checkbox-wrapper-19">
+                        <input type="checkbox" id="1" />
+                        <label for="1" class="check-box">
+                    </div>Quest
+                </li>
+                <li>
+                    <div class="checkbox-wrapper-19">
+                        <input type="checkbox" id="2" />
+                        <label for="2" class="check-box">
+                    </div>Quest
+                </li>
+                <li>
+                    <div class="checkbox-wrapper-19">
+                        <input type="checkbox" id="3" />
+                        <label for="3" class="check-box">
+                    </div>Quest
+                </li>
+                <li>
+                    <div class="checkbox-wrapper-19">
+                        <input type="checkbox" id="4" />
+                        <label for="4" class="check-box">
+                    </div>Quest
+                </li>
+                <li>
+                    <div class="checkbox-wrapper-19">
+                        <input type="checkbox" id="5" />
+                        <label for="5" class="check-box">
+                    </div>Quest
+                </li>
+
+
 
             </ul>
         </div>
@@ -49,20 +78,6 @@
 
     <div class="desk">
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Le focus est défini dès que la page est prête
-            var inputElement = document.getElementById('user-input');
-            inputElement.focus();
-
-            // Maintenir le focus même si l'utilisateur clique ailleurs
-            inputElement.addEventListener('blur', function () {
-                this.focus();
-            });
-        });
-    </script>
-
 </body>
 
 </html>
