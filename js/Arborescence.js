@@ -18,7 +18,6 @@ class Directory {
         let retour = null;
         for (let i = 0; i < this.dir_array.length; i++) {
             if (this.dir_array[i] instanceof Directory && this.dir_array[i].dir_name == name_dir) {
-                console.log("le directory existe coucou");
                 retour = this.dir_array[i];
             }
         }
@@ -72,9 +71,7 @@ main_directory.addToDirectory(new Directory('Pictures'), main_directory);
 
 let document = new Directory('Documents', main_directory);
 
-console.log(document);
 document.addToDirectory(new File('test2.txt'));
-console.log(document);
 
 
 main_directory.addToDirectory(document);
