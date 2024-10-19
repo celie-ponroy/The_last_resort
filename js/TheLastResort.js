@@ -44,9 +44,11 @@ export class TheLastResort {
                 this.addResultToUI(res);
                 break;
         }
-        //updateStatus();
+        console.log("this.updateStatus appel :");
+        this.updateStatus();
 
     }
+
     updateCurrent() {
         let i = 0;
         for (i = 0; i < this.quests.length; i++) {
@@ -56,15 +58,17 @@ export class TheLastResort {
         }
         this.current = i;
     }
-/*
+
     updateStatus(){
-        for(let i = 0; i < this.commands.length ; i++){
+        console.log("this.updateStatus ");
+        for(let i = 0; i < this.quests.length ; i++){
             if(this.quests[i].getFinished() == false){
                 return;
             }
         }
-        finish();
-    }*/
+        console.log("this.Finnish appel :");
+        this.finish();
+    }
 
     addcommandToUI(command) {
         const ulElement = document.querySelector('.screen ul');
@@ -78,22 +82,19 @@ export class TheLastResort {
     addResultToUI(command) {
         const ulElement = document.querySelector('.screen ul');
 
-        // Ajouter un nouvel élément à la fin de la liste
-        const newListItem = document.createElement('p');
-        newListItem.textContent = command;
-        ulElement.appendChild(newListItem);
+        const newItem = document.createElement('p');
+        newItem.textContent = command;
+        ulElement.appendChild(newItem);
     }
-/*
+
     finish(){
-        const ulElement = document.querySelector('quests');
-
-        // Ajouter un nouvel élément à la fin de la liste
-        const newListItem = document.createElement('p');
-        newListItem.textContent = "Well done you saved the earth!!";
-        ulElement.appendChild(newListItem);
+        //stopper le timer TODO
+        const ulElement = document.querySelector('.screen ul');
+        const finishText = document.createElement('p');
+        finishText.textContent = 'Well done you saved the earth!!';
+        ulElement.replaceChildren(finishText)
     }
 
-    */
-
+    
 
 }
