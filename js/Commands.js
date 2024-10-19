@@ -1,5 +1,8 @@
 'use strict'
 
+import { File, Directory } from "./Arborescence.js";
+
+
 class Command {
     constructor() {
     }
@@ -87,6 +90,21 @@ export class Edit extends Command {
     }
 }
 
+
+export class Create extends Command {
+    constructor() { super() }
+    execute(argument, current_dir) {
+        if (argument.includes('.')) {
+            console.log("L'argument contient un point.");
+            current_dir.addToDirectory(new File(argument));
+        } else {
+            console.log("L'argument ne contient pas de point.");
+            current_dir.addToDirectory(new Directory(argument, current_dir));
+
+        }
+
+    }
+}
 
 
 
