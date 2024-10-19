@@ -12,6 +12,7 @@ export class TheLastResort{
     executeCmd(string=""){
         // split par espace
         //ex overlay = true => ["overlay","=","true"]
+        this.addcommandToUI(string);
         let command = string.split(' ');
         switch(command[0]){
             case "nano":
@@ -25,8 +26,10 @@ export class TheLastResort{
                 break;
             case "run":
                 //script
-                let script = new Script()
-                console.log(script.execute(string));
+                let script = new Script();
+                let res = script.execute(string);
+                console.log(res);
+                this.addcommandToUI(res);
                 break;
         }
 
@@ -45,6 +48,14 @@ export class TheLastResort{
             }
         }
         this.current = i;
+    }
+    addcommandToUI(command){
+        const ulElement = document.querySelector('.screen ul');
+
+        // Ajouter un nouvel élément à la fin de la liste
+        const newListItem = document.createElement('li');
+        newListItem.textContent = command;
+        ulElement.appendChild(newListItem);
     }
     
 }
