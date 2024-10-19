@@ -10,6 +10,10 @@
 $color_text_screen: #0c0;
 $text_screen_size: 1.5em;
 
+
+
+
+
 body {
     background-color: rgb(45, 66, 66);
 
@@ -66,9 +70,7 @@ body {
                 background-image: radial-gradient(#444, #111);
                 box-shadow: 0 0 5vmin 1vmin #000 inset;
                 overflow: hidden;
-                /* Limiter les animations à l'intérieur de .screen */
                 position: relative;
-                /* Pour s'assurer que les pseudo-éléments sont contenus à l'intérieur */
 
 
 
@@ -114,12 +116,51 @@ body {
                 }
 
                 ul {
-                    padding-top: 3vmin;
 
-                    li::before {
-                        content: ">";
+
+                    li:before {
                         margin-right: 0.3em;
+                        content: ">";
+
                     }
+
+                    padding-top: 3vmin;
+                    /* Espace en haut de la liste */
+                    height: 85%;
+                    /* Hauteur fixe pour permettre le défilement */
+                    overflow-y: auto;
+                    /* Active le défilement vertical */
+                    margin: 0;
+                    /* Réinitialiser les marges par défaut si nécessaire */
+                    padding: 0;
+                    /* Réinitialiser le remplissage par défaut si nécessaire */
+
+                    /* Styles pour Chrome, Edge, Safari */
+                    &::-webkit-scrollbar {
+                        width: 36px;
+                        /* Largeur de la scrollbar */
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        background: rgba(0, 0, 0, 0.5);
+                        /* Zone de la scrollbar */
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background: #0c0;
+                        /* Couleur de la barre */
+                        border-radius: 0px;
+                        /* Coins arrondis */
+                    }
+
+                    &::-webkit-scrollbar-thumb:hover {
+                        background: #0a0;
+                        /* Couleur au survol */
+                    }
+
+                    /* Barre de défilement mince */
+                    scrollbar-color: #0c0 transparent;
+                    /* Couleur de la barre et de la piste */
                 }
 
                 form {

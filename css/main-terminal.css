@@ -58,9 +58,7 @@ body .container .computer .screen {
   background-image: radial-gradient(#444, #111);
   box-shadow: 0 0 5vmin 1vmin #000 inset;
   overflow: hidden;
-  /* Limiter les animations à l'intérieur de .screen */
   position: relative;
-  /* Pour s'assurer que les pseudo-éléments sont contenus à l'intérieur */
 }
 body .container .computer .screen:hover {
   cursor: url("../img/selector_cursor.svg"), pointer;
@@ -97,10 +95,41 @@ body .container .computer .screen:first-child, body .container .computer .screen
 }
 body .container .computer .screen ul {
   padding-top: 3vmin;
+  /* Espace en haut de la liste */
+  height: 85%;
+  /* Hauteur fixe pour permettre le défilement */
+  overflow-y: auto;
+  /* Active le défilement vertical */
+  margin: 0;
+  /* Réinitialiser les marges par défaut si nécessaire */
+  padding: 0;
+  /* Réinitialiser le remplissage par défaut si nécessaire */
+  /* Styles pour Chrome, Edge, Safari */
+  /* Barre de défilement mince */
+  scrollbar-color: #0c0 transparent;
+  /* Couleur de la barre et de la piste */
 }
-body .container .computer .screen ul li::before {
-  content: ">";
+body .container .computer .screen ul li:before {
   margin-right: 0.3em;
+  content: ">";
+}
+body .container .computer .screen ul::-webkit-scrollbar {
+  width: 36px;
+  /* Largeur de la scrollbar */
+}
+body .container .computer .screen ul::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+  /* Zone de la scrollbar */
+}
+body .container .computer .screen ul::-webkit-scrollbar-thumb {
+  background: #0c0;
+  /* Couleur de la barre */
+  border-radius: 0px;
+  /* Coins arrondis */
+}
+body .container .computer .screen ul::-webkit-scrollbar-thumb:hover {
+  background: #0a0;
+  /* Couleur au survol */
 }
 body .container .computer .screen form input,
 body .container .computer .screen form textarea,
