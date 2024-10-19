@@ -1,0 +1,67 @@
+// Variables pour les couleurs
+$bg-color: #9c4e4e; // Couleur de fond de la table
+$bg-color-desk: #4d1e1e;
+$paper-color: #ece7e7; // Couleur du papier
+$shadow-color: rgba(0, 0, 0, 0.2); // Couleur de l'ombre
+$hover-color: rgba(255, 255, 255, 0.9); // Couleur du papier au survol
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Hauteur de la fenêtre
+    background-color: $bg-color; // Couleur de fond
+}
+
+
+
+.paper {
+    background-color: $paper-color; // Couleur de fond du papier
+    width: 35em;
+    height: 45em;
+    border: 1px solid #ccc; // Bordure pour simuler le papier
+    border-radius: 5px; // Coins arrondis
+    box-shadow: 0 2px 5px $shadow-color; // Ombre douce
+    padding: 15px; // Espacement interne
+    transition: all 0.3s ease; // Transition pour l'effet au survol
+    display: none; // Masquer les papiers par défaut
+}
+
+// Styles pour les flèches de navigation
+.navigation {
+    margin-top: 20px; // Espacement au-dessus des flèches
+}
+
+.nav-button {
+    padding: 10px 20px; // Espacement interne
+    background-color: $paper-color; // Couleur de fond
+    border: 1px solid #ccc; // Bordure
+    border-radius: 5px; // Coins arrondis
+    cursor: pointer; // Curseur pointer
+    transition: background-color 0.3s ease; // Transition pour le changement de couleur
+
+    &:hover {
+        background-color: $hover-color; // Changer de couleur au survol
+    }
+
+    &:disabled {
+        background-color: #e0e0e0; // Couleur de fond pour le bouton désactivé
+        cursor: not-allowed; // Curseur not-allowed
+    }
+}
+
+// Styles pour les titres et paragraphes
+h2 {
+    font-size: 1.5em; // Taille du titre
+    color: #333; // Couleur du titre
+    margin: 0 0 10px; // Espacement du titre
+}
+
+p {
+    font-size: 1em; // Taille du texte
+    color: #555; // Couleur du texte
+    line-height: 1.5; // Hauteur de ligne
+    margin: 0; // Supprimer les marges
+}
