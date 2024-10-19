@@ -37,7 +37,7 @@ export class TheLastResort {
             case "ls":
                 //script
 
-                this.addcommandToUI(new Liste().execute(this.current_dir.dir_array));
+                this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
                 break;
 
             case "cd":
@@ -68,9 +68,9 @@ export class TheLastResort {
         this.current = i;
     }
 
-    updateStatus(){
-        for(let i = 0; i < this.quests.length ; i++){
-            if(this.quests[i].getFinished() == false){
+    updateStatus() {
+        for (let i = 0; i < this.quests.length; i++) {
+            if (this.quests[i].getFinished() == false) {
                 return;
             }
         }
@@ -94,7 +94,7 @@ export class TheLastResort {
         ulElement.appendChild(newItem);
     }
 
-    finish(){
+    finish() {
         //stopper le timer TODO
         const ulElement = document.querySelector('.screen ul');
         const finishText = document.createElement('p');
@@ -102,6 +102,6 @@ export class TheLastResort {
         ulElement.replaceChildren(finishText);
     }
 
-    
+
 
 }
