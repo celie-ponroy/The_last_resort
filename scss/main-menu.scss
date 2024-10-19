@@ -1,0 +1,57 @@
+@use "reset";
+
+// main-menu.scss
+
+// Variables pour les couleurs
+$bg-color: #2c3e50;
+$primary-color: #3498db;
+$hover-color: #2980b9;
+$text-color: #ecf0f1;
+$font-stack: 'Arial', sans-serif;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-stack;
+    background-color: $bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Prend toute la hauteur de l'écran
+}
+
+.menu-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1); // Légère transparence
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); // Ombre douce
+    backdrop-filter: blur(10px); // Flou en arrière-plan
+}
+
+h1 {
+    color: $text-color;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.character-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; // Espacement entre les options
+}
+
+.character-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: $text-color;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease; // Animation lors du survol
+
+    &:hover {
+        background-color: $hover-color; // Couleur de fond au survol
+    }
+}
