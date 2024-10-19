@@ -152,10 +152,11 @@ export class TheLastResort {
             ${quest.name}`;
         questElements.appendChild(li);
     }
+
     updateQuestUI(){
         for(let index = 0;index<this.quests.length;index++){
-            let checkbox = document.getElementById('1');
-            checkbox.checked = !this.quests[index].getFinished();
+            let checkbox = document.getElementById(index+1);
+            checkbox.checked = this.quests[index].getFinished();
         }        
     }
 
