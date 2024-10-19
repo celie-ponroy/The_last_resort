@@ -25,6 +25,7 @@ export class Script extends Command {
                 break;
             case "nino.sh":
                 res = "nino to the rescue";
+                break;
             case "matias.sh":
                 res = "you bought a cookie to matias he will help you"
                 break;
@@ -43,17 +44,6 @@ export class Script extends Command {
 
     }
 }
-/*
-export class Variable extends Command{
-    constructor(string){super(string)}
-    execute(string){
-        if(string==this.command){
-          return true;
-        }
-        else
-            return false;
-    }
-}*/
 
 
 //TODO
@@ -67,7 +57,6 @@ export class Nano extends Command {
             return false;
     }
 }
-//TODO
 export class Cd extends Command {
     constructor() { super() }
     execute(argument, current_dir) {

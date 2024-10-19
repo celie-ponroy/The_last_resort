@@ -13,7 +13,7 @@ export class TheLastResort {
 
 
 
-    addQuest(quest) {//=random 
+    addQuest(quest) {
         this.updateCurrent()
         this.quests.push(quest);
     }
@@ -99,7 +99,7 @@ export class TheLastResort {
         const ulElement = document.querySelector('.screen ul');
         const finishText = document.createElement('p');
         finishText.textContent = 'Well done you saved the earth!!';
-        ulElement.replaceChildren(finishText)
+        ulElement.replaceChildren(finishText);
     }
 
     
