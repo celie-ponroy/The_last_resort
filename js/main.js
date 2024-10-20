@@ -40,6 +40,11 @@ form.addEventListener('submit', (event) => {
  });
 */
 
+function scrollToBottom() {
+    const list = document.getElementById('scrollable-list');
+    list.scrollTop = list.scrollHeight; // Définit la position de défilement au bas du conteneur
+}
+
 theLastResort.updateQuestUI()
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const inputValue = userInput.value;
         theLastResort.executeCmd(inputValue);
+
+        scrollToBottom();
+
     });
 
     //save file
