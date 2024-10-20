@@ -1,9 +1,10 @@
 'use strict'
 import { Quest } from "./Quest.js";
 import { TheLastResort } from "./TheLastResort.js";
+import { File } from "./Arborescence.js";
 
 let theLastResort = new TheLastResort();
-let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify hello = true", "run repairElectricalSystems.sh"])
+let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify hello = true", "run repairElectricalSystems.sh"]);
 let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify hello = true", "run celie.sh"]);
 let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["Documents>config.conf:'prop=true;'"]);
 

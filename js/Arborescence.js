@@ -124,25 +124,15 @@ main_directory.addToDirectory(document);
 
 let file = new File('test.txt')
 
-file.editFile(`# The network configuration file. This file is currently only used in
-    # conjunction with the TI-RPC code in the libtirpc library.
-    #
-    # Entries consist of:
-    #
-    #       <network_id> <semantics> <flags> <protofamily> <protoname> \
-    #               <device> <nametoaddr_libs>
-    #
-    # The <device> and <nametoaddr_libs> fields are always empty in this
-    # implementation.
-    #
-    udp        tpi_clts      v     inet     udp     -       -
+file.editFile(`udp        tpi_clts      v     inet     udp     -       -
     tcp        tpi_cots_ord  v     inet     tcp     -       -
     udp6       tpi_clts      v     inet6    udp     -       -
     tcp6       tpi_cots_ord  v     inet6    tcp     -       -
     rawip      tpi_raw       -     inet      -      -       -
-    local      tpi_cots_ord  -     loopback  -      -       -
+    local      tpi_cots_ord  V     loopback  -      -       -
     unix       tpi_cots_ord  -     loopback  -      -       -`);
 
 main_directory.addToDirectory(file);
+
 
 
