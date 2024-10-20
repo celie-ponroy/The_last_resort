@@ -139,7 +139,11 @@ export class Liste extends Command {
         let retour = "";
 
         for (let i = 0; i < dir_array.length; i++) {
-            retour += dir_array[i] + " | ";
+
+            if (dir_array[i] instanceof Directory)
+                retour += dir_array[i].dir_name + " | ";
+            else
+                retour += dir_array[i].file_name + " | ";
         }
         return retour;
     }

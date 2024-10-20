@@ -38,7 +38,6 @@ export class TheLastResort {
                         this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
                     else
                         this.addResultToUI("Something went wrong :(");
-                    this.clearPrompt();
 
                     break;
                 case "modify":
@@ -69,10 +68,17 @@ export class TheLastResort {
                     //cd
                     let cd = new Cd();
                     let new_current_dir = cd.execute(command[1], this.current_dir);
+
+                    console.log(new_current_dir);
                     if (new_current_dir == null)
                         this.addResultToUI("Something went wrong :(");
-                    else
+                    else {
                         this.current_dir = new_current_dir;
+                        console.log(this.current_file);
+                    }
+
+
+
                     this.clearPrompt();
 
                     break;
@@ -93,6 +99,7 @@ export class TheLastResort {
             }
         } else {
             this.current_file.editFile(editabletextarea.value);
+
             editabletextarea.value = "";
             editabletextarea.style.display = "none";
             document.getElementById('user-input').style.display = "";
@@ -129,7 +136,7 @@ export class TheLastResort {
         }
         this.stopTimer();
         this.finish(true);
-        
+
     }
 
     addcommandToUI(command) {
@@ -196,10 +203,10 @@ export class TheLastResort {
     }
 
     finish(win) {
-        if(!win){
+        if (!win) {
             this.replaceUI('Oh no the robot was exploded :(  the atmosphere will still be dirty');
         }
-        if(win)
+        if (win)
             this.replaceUI('Well done you saved the earth!!');
     }
 

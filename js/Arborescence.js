@@ -110,39 +110,91 @@ export class File {
 
 
 //arborescence statique
-export const main_directory = new Directory('User', null);
+// Arborescence dynamique pour un robot dans l'espace
+export const main_directory = new Directory('SpaceRobot', null);
 
-main_directory.addToDirectory(new Directory('Downloads', main_directory));
-main_directory.addToDirectory(new Directory('Pictures'), main_directory);
+// Répertoires principaux
+main_directory.addToDirectory(new Directory('Navigation', main_directory));
+main_directory.addToDirectory(new Directory('Communication', main_directory));
+main_directory.addToDirectory(new Directory('Data', main_directory));
+main_directory.addToDirectory(new Directory('Maintenance', main_directory));
+main_directory.addToDirectory(new Directory('Science', main_directory));
 
-let document = new Directory('Documents', main_directory);
+// Sous-répertoires dans 'Navigation'
+let pathfinding_directory = new Directory('Pathfinding', main_directory.getDirectoryByName('Navigation'));
+main_directory.getDirectoryByName('Navigation').addToDirectory(pathfinding_directory);
+pathfinding_directory.addToDirectory(new File('astar_algorithm.py'));
+pathfinding_directory.addToDirectory(new File('waypoint_coordinates.csv'));
 
-document.addToDirectory(new File('test2.txt'));
+// Sous-répertoires dans 'Communication'
+let telemetry_directory = new Directory('Telemetry', main_directory.getDirectoryByName('Communication'));
+main_directory.getDirectoryByName('Communication').addToDirectory(telemetry_directory);
+telemetry_directory.addToDirectory(new File('signal_logs.txt'));
+telemetry_directory.addToDirectory(new File('transmission_report.csv'));
 
+// Sous-répertoires dans 'Data'
+let sensor_data_directory = new Directory('Sensor', main_directory.getDirectoryByName('Data'));
+main_directory.getDirectoryByName('Data').addToDirectory(sensor_data_directory);
+sensor_data_directory.addToDirectory(new File('temperature_readings.json'));
+sensor_data_directory.addToDirectory(new File('pressure_readings.json'));
 
-main_directory.addToDirectory(document);
+// Sous-répertoires dans 'Maintenance'
+let repair_directory = new Directory('Repair', main_directory.getDirectoryByName('Maintenance'));
+main_directory.getDirectoryByName('Maintenance').addToDirectory(repair_directory);
+repair_directory.addToDirectory(new File('tool_inventory.txt'));
+repair_directory.addToDirectory(new File('repair_manual.pdf'));
 
-let file = new File('test.txt')
+// Sous-répertoires dans 'Science'
+let experiments_directory = new Directory('Experiments', main_directory.getDirectoryByName('Science'));
+main_directory.getDirectoryByName('Science').addToDirectory(experiments_directory);
+experiments_directory.addToDirectory(new File('gravity_test_results.txt'));
+experiments_directory.addToDirectory(new File('sample_analysis.csv'));
 
-file.editFile(`# The network configuration file. This file is currently only used in
-    # conjunction with the TI-RPC code in the libtirpc library.
-    #
-    # Entries consist of:
-    #
-    #       <network_id> <semantics> <flags> <protofamily> <protoname> \
-    #               <device> <nametoaddr_libs>
-    #
-    # The <device> and <nametoaddr_libs> fields are always empty in this
-    # implementation.
-    #
-    udp        tpi_clts      v     inet     udp     -       -
-    tcp        tpi_cots_ord  v     inet     tcp     -       -
-    udp6       tpi_clts      v     inet6    udp     -       -
-    tcp6       tpi_cots_ord  v     inet6    tcp     -       -
-    rawip      tpi_raw       -     inet      -      -       -
-    local      tpi_cots_ord  -     loopback  -      -       -
-    unix       tpi_cots_ord  -     loopback  -      -       -`);
+// Exemple d'édition d'un fichier dans 'Navigation'
+let configFile = new File('navigation_config.json');
+configFile.editFile(`{
+    "navigation_system": "autonomous",
+    "waypoint_threshold": 0.5,
+    "max_speed": 2.5,
+    "obstacle_detection": true
+}`);
 
-main_directory.addToDirectory(file);
+let orientation_log = new File('orientation.log');
+configFile.editFile(`<20/10/2024> - Début de l'analyse de l'astéroïde 234 dans la ceinture principale.
+État du système : OK
 
+<20/10/2024 14:00 UTC> - Orientation initiale réglée à 45°N, 30°E.
+Données : Dérive due à l'attraction gravitationnelle locale détectée.
 
+<20/10/2024 14:15 UTC> - Réajustement à 50°N, 25°E.
+Observation : Stabilisation réussie, température de surface enregistrée.
+
+<20/10/2024 14:20 UTC> - Scan LIDAR actif.
+État du système : OK
+Orientation : 55°N, 20°E. Structures géologiques identifiées.
+
+<20/10/2024 14:25 UTC> - Données collectées : élévation max de 15 mètres, composition silicate/métal.
+Ajustement : 60°N, 15°E pour images haute résolution.
+
+<20/10/2024 14:30 UTC> - Analyse terminée, données envoyées à la base.
+Statut : En attente de nouvelles instructions.`);
+
+main_directory.getDirectoryByName('Navigation').addToDirectory(orientation_log);
+
+main_directory.getDirectoryByName('Navigation').addToDirectory(configFile);
+
+// Exemple d'édition de fichier dans 'Data/Sensor Data'
+let temperatureFile = sensor_data_directory.getFileByName('temperature_readings.json');
+temperatureFile.editFile(`{
+    "readings": [
+        {"timestamp": "2024-10-20T12:00:00Z", "temperature": -50},
+        {"timestamp": "2024-10-20T12:10:00Z", "temperature": -49.5},
+        {"timestamp": "2024-10-20T12:20:00Z", "temperature": -49.0}
+    ]
+}`);
+
+// Ajout d'un autre fichier dans 'Data/Sensor Data'
+sensor_data_directory.addToDirectory(new File('humidity_readings.json'));
+
+// Affichage de l'arborescence
+console.log(main_directory.toString());
