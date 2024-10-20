@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Last Resort</title>
     <link rel="stylesheet" href="/css/main-menu.css">
+    <script>
+        function PlayMusic() {
+            var play = document.getElementById("music");
+            play.play().catch(function (error) {
+                console.log("L'utilisateur doit d'abord interagir avec la page.");
+            });
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("musicModal").style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -16,6 +29,20 @@
             <h2><a href="html/terminal-player.html" class="character-link">Stagiaire</a></h2>
         </div>
     </div>
+
+    <!-- Modale demandant la permission pour lancer la musique -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <p>Souhaitez-vous activer la musique de fond ?</p>
+            <button class="modal-button" onclick="PlayMusic()">Autoriser</button>
+        </div>
+    </div>
+
+    <!-- Lecture de l'audio sans barre de contrôle -->
+    <audio loop id="music" style="display:none;">
+        <source src="music/Boucle.wav" type="audio/mpeg">
+    </audio>
+
 </body>
 
 </html>

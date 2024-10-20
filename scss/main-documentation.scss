@@ -6,12 +6,14 @@ $shadow-color: rgba(0, 0, 0, 0.2); // Couleur de l'ombre
 $hover-color: rgba(255, 255, 255, 0.9); // Couleur du papier au survol
 
 body {
-    margin: 0;
+    color: #353535; // Couleur du texte
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; // Hauteur de la fenêtre
+    margin-top: 3em;
+
     background-color: $bg-color; // Couleur de fond
 }
 
@@ -20,11 +22,14 @@ body {
 .paper {
     background-color: $paper-color; // Couleur de fond du papier
     width: 35em;
-    height: 45em;
+
+    margin-top: 3em;
+    margin-bottom: 3em;
+    height: auto;
     border: 1px solid #ccc; // Bordure pour simuler le papier
     border-radius: 5px; // Coins arrondis
     box-shadow: 0 2px 5px $shadow-color; // Ombre douce
-    padding: 15px; // Espacement interne
+    padding: 4em; // Espacement interne
     transition: all 0.3s ease; // Transition pour l'effet au survol
     display: none; // Masquer les papiers par défaut
 }
