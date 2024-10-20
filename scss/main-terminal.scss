@@ -300,7 +300,7 @@ body {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             /* Deux colonnes fixes */
-            gap: 10px;
+            gap: 0.8em;
         }
 
         ul.list li {

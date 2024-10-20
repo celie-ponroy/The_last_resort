@@ -107,6 +107,15 @@ export class Create extends Command {
 }
 
 
+export class Delete extends Command {
+    constructor() { super() }
+    execute(argument, current_dir) {
+        current_dir.deleteFromDirectory(argument);
+
+    }
+}
+
+
 
 export class Cd extends Command {
     constructor() { super() }

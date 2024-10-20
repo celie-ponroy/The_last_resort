@@ -1,5 +1,5 @@
 'use strict'
-import { Script, Edit, Liste, Cd, Create } from "./Commands.js";
+import { Script, Edit, Liste, Cd, Create, Delete } from "./Commands.js";
 
 import { main_directory } from "./Arborescence.js";
 
@@ -34,7 +34,11 @@ export class TheLastResort {
             switch (command[0]) {
                 case "edit":
                     //classe nano et execution
-                    this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
+                    if (command[1].includes('.'))
+                        this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
+                    else
+                        this.addResultToUI("Something went wrong :(");
+                    this.clearPrompt();
 
                     break;
                 case "modify":
@@ -50,6 +54,12 @@ export class TheLastResort {
 
                     break;
 
+                case 'delete':
+                    new Delete().execute(command[1], this.current_dir);
+                    this.clearPrompt();
+
+                    break;
+
                 case "ls":
                     this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
                     this.clearPrompt();
@@ -60,7 +70,7 @@ export class TheLastResort {
                     let cd = new Cd();
                     let new_current_dir = cd.execute(command[1], this.current_dir);
                     if (new_current_dir == null)
-                        this.addResultToUI("Something whent wrong :(");
+                        this.addResultToUI("Something went wrong :(");
                     else
                         this.current_dir = new_current_dir;
                     this.clearPrompt();

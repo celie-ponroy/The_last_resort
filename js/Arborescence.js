@@ -13,6 +13,40 @@ export class Directory {
         this.dir_array.push(child);
     }
 
+    deleteFromDirectory(child) {
+
+        if (child.includes('.')) {
+            // On suppose que c'est un fichier si ça contient un point (.)
+            let file = this.getFileByName(child);
+
+            if (file !== null) {
+                // Trouver l'index du fichier et le supprimer
+                const index = this.dir_array.indexOf(file);
+                if (index !== -1) {
+                    this.dir_array.splice(index, 1); // Supprime le fichier
+                    console.log(`${child} a été supprimé du répertoire.`);
+                }
+            } else {
+                console.log(`${child} n'existe pas dans ce répertoire.`);
+            }
+
+        } else {
+            // On suppose que c'est un répertoire si ça ne contient pas de point
+            let directory = this.getDirectoryByName(child);
+
+            if (directory !== null) {
+                // Trouver l'index du répertoire et le supprimer
+                const index = this.dir_array.indexOf(directory);
+                if (index !== -1) {
+                    this.dir_array.splice(index, 1); // Supprime le répertoire
+                    console.log(`${child} a été supprimé du répertoire.`);
+                }
+            } else {
+                console.log(`Le répertoire ${child} n'existe pas dans ce répertoire.`);
+            }
+        }
+    }
+
     getDirectoryByName(name_dir) {
 
         let retour = null;
@@ -110,6 +144,5 @@ file.editFile(`# The network configuration file. This file is currently only use
     unix       tpi_cots_ord  -     loopback  -      -       -`);
 
 main_directory.addToDirectory(file);
-
 
 

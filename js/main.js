@@ -3,12 +3,15 @@ import { Quest } from "./Quest.js";
 import { TheLastResort } from "./TheLastResort.js";
 
 let theLastResort = new TheLastResort();
-let quest1 = new Quest("Réparer l'aile droite",["modify hello = true","run repairElectricalSystems.sh"])
-let quest2 = new Quest("Réparer l'aile gauche",["modify hello = true","run celie.sh"])
- 
+let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify hello = true", "run repairElectricalSystems.sh"])
+let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify hello = true", "run celie.sh"]);
+let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["Documents>config.conf:'prop=true;'"]);
+
 
 theLastResort.addQuest(quest1);
-theLastResort.addQuest(quest2)
+theLastResort.addQuest(quest2);
+theLastResort.addQuest(quest3);
+
 /*
 //default values
 theLastResort.executeCmd("modify hello = true");
