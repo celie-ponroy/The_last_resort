@@ -112,11 +112,16 @@
 
         <h3>Lancement de propulseurs</h3>
         <p>
-            Dans le dossier Navigation changer le fichier : </p>
+            Pour lancer les propulseurs, le dossier Navigation changer le fichier : </p>
         <ul>
-            <li> nav.txt :Uniquement si ce fichier existe. Si c'est le cas passez la variable nav_enable à faux.</li>
-            <li>navigation_conf.json :Dans ce fichier le max speed DOIT etre à 3.5.</li>
+
+            <li> nav.txt : Uniquement si ce fichier existe. Si c'est le cas passez la variable nav_enable à faux.</li>
+            <li>navigation_conf.json :Dans ce fichier le max speed DOIT etre à 3.5. sauf si le obstacle_detection est
+                faux </li>
         </ul>
+        <p>
+            Si ces deux étapes ne sont pas respectés le robot peut finir par dévelloper un intelligence propre et partir
+            voyager dans l'espace. </p>
     </div>
     <div class="paper" id="paper4">
         <h2>Température Systeme température systeme</h2>
@@ -136,8 +141,16 @@
         </ul>
         <h3>Si une seule température est négative:</h3>
         <ul>
-            <li>changer la troisiève valeur avec x telle que 0 = température1*x³ + 50</li>
+            <li>changer la troisième valeur avec x telle que 0 = température1*x³ + 50</li>
+            <li>changer la deuxieme valeur avec y telle que 0 = température2*y-5 + x</li>
+            <li>changer la première valeur avec 0</li>
         </ul>
+        <blockquote>
+            <h5>PS : pour se déplacer dans un dossier utiliser "cd nom_du_document" pour aller dans le dossier parent
+                faire "cd .." .<br>
+                PS2: Si vous n'arivez pas à trouvez x et y si une seule température est négative: retrournez au lycée.
+            </h5>
+        </blockquote>
     </div>
     <div class="navigation">
         <button id="prev" class="nav-button" disabled>&lt; Précédent</button>
