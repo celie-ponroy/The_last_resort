@@ -228,7 +228,7 @@ body .container ul.list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* Deux colonnes fixes */
-  gap: 10px;
+  gap: 0.8em;
 }
 body .container ul.list li {
   display: flex;

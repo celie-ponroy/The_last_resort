@@ -1,12 +1,12 @@
 'use strict'
 
-export class Quest{
+export class Quest {
 
-    constructor(name="Quest",commandsParam=[]){
+    constructor(name = "Quest", commandsParam = []) {
         this.name = name;
         this.finished = false;
         this.executed = [];
-        for (let i = 0; i < commandsParam.length ; i++){
+        for (let i = 0; i < commandsParam.length; i++) {
             this.executed[i] = false; // at first nothing is executed
         }
         this.commands = commandsParam;
@@ -14,23 +14,23 @@ export class Quest{
 
     }
 
-    getFinished(){
+    getFinished() {
         return this.finished;
     }
 
-    getCurrent(){
+    getCurrent() {
         let i;
-        for(i = 0; i<this.commands.length ; i++){
-            if(this.executed[i]==false){
+        for (i = 0; i < this.commands.length; i++) {
+            if (this.executed[i] == false) {
                 return i;
             }
         }
         return i;//the last by default
     }
 
-    updateStatus(){
-        for(let i = 0; i < this.commands.length ; i++){
-            if(this.executed[i] == false){
+    updateStatus() {
+        for (let i = 0; i < this.commands.length; i++) {
+            if (this.executed[i] == false) {
                 this.finished = false;
                 return;
             }
@@ -39,31 +39,41 @@ export class Quest{
     }
 
     checkVar(string) {
-    let equal = this.compareCommands(string)
-    if(equal){
-        this.executed[this.getCurrent()]= true;
-        this.updateStatus();
-    }
-    
-    return equal;
-    }
-
-    checkScript(command){
-        let equal = this.compareCommands(command);
-        if(equal){
-            this.executed[this.getCurrent()]= true;
+        let equal = this.compareCommands(string)
+        if (equal) {
+            this.executed[this.getCurrent()] = true;
             this.updateStatus();
         }
-    
+
         return equal;
     }
 
-    compareCommands(string){
+    checkScript(command) {
+        let equal = this.compareCommands(command);
+        if (equal) {
+            this.executed[this.getCurrent()] = true;
+            this.updateStatus();
+        }
+
+        return equal;
+    }
+
+    compareCommands(string) {
         let string1 = string.replace(/\s+/g, ' ').trim();
         let cmdCur = this.commands[this.getCurrent()];
         let string2 = cmdCur.replace(/\s+/g, ' ').trim();
 
         return string1 === string2;
     }
-        
+
+    checkPathToConf(path) {
+        let equal = this.compareCommands(command);
+        if (equal) {
+            this.executed[this.getCurrent()] = true;
+            this.updateStatus();
+        }
+
+        return equal;
+    }
+
 }
