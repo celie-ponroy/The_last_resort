@@ -159,8 +159,9 @@ configFile.editFile(`{
     "obstacle_detection": true
 }`);
 
+
 let orientation_log = new File('orientation.log');
-configFile.editFile(`<20/10/2024> - Début de l'analyse de l'astéroïde 234 dans la ceinture principale.
+orientation_log.editFile(`<20/10/2024> - Début de l'analyse de l'astéroïde 234 dans la ceinture principale.
 État du système : OK
 
 <20/10/2024 14:00 UTC> - Orientation initiale réglée à 45°N, 30°E.
@@ -177,7 +178,10 @@ Orientation : 55°N, 20°E. Structures géologiques identifiées.
 Ajustement : 60°N, 15°E pour images haute résolution.
 
 <20/10/2024 14:30 UTC> - Analyse terminée, données envoyées à la base.
-Statut : En attente de nouvelles instructions.`);
+Statut : En attente de nouvelles instructions.
+
+<20/10/2024 18:24 UTC> - Collision avec la Terre Iminent
+État du système : <!> PROBLEME <!>`);
 
 main_directory.getDirectoryByName('Navigation').addToDirectory(orientation_log);
 
@@ -198,3 +202,4 @@ sensor_data_directory.addToDirectory(new File('humidity_readings.json'));
 
 // Affichage de l'arborescence
 console.log(main_directory.toString());
+

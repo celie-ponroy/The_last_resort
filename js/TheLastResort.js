@@ -14,7 +14,7 @@ export class TheLastResort {
         this.initial = 0;
         this.countDownDate = 0;
         this.timeleft = 0;
-        this.initTimer(1);
+        this.initTimer(5);
 
     }
 
@@ -34,9 +34,9 @@ export class TheLastResort {
             switch (command[0]) {
                 case "edit":
                     //classe nano et execution
-                    if (command[1].includes('.'))
+                    if (command[1].includes('.')) {
                         this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
-                    else
+                    } else
                         this.addResultToUI("Something went wrong :(");
 
                     break;
@@ -72,13 +72,11 @@ export class TheLastResort {
                     console.log(new_current_dir);
                     if (new_current_dir == null)
                         this.addResultToUI("Something went wrong :(");
+
                     else {
                         this.current_dir = new_current_dir;
-                        console.log(this.current_file);
+                        this.quests[this.current].checkCD(string);
                     }
-
-
-
                     this.clearPrompt();
 
                     break;
@@ -88,7 +86,7 @@ export class TheLastResort {
                     //script
                     let script = new Script();
                     let res = script.execute(string);
-                    this.quests[this.current].checkScript(string)
+                    this.quests[this.current].checkScript(string);
                     this.addResultToUI(res);
                     this.clearPrompt();
 
@@ -108,6 +106,9 @@ export class TheLastResort {
             const label = document.querySelector('label[for="user-input"]');
             label.textContent = '';
             document.getElementById('scrollable-list').style.display = "block";
+
+            this.quests[this.current].checkEdit(this.current_file);
+            this.addResultToUI("File edited :)");
 
         }
         this.updateCurrent();
