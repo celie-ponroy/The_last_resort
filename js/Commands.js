@@ -17,7 +17,7 @@ export class Script extends Command {
         switch (string.split(" ")[1]) {
             case "altf4.sh":
                 res = "Crédits:\n" +
-                    "Amaglio Matias: son +\n" +
+                    "Amaglio Matias: son \n" +
                     "Arcelin Nino: htlm/scss et devellopement backend\n" +
                     "Ponroy Célie: devellopement backend" +
                     "--------------------------------------------------"
