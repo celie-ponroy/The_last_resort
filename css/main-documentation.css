@@ -7,6 +7,36 @@ body {
   margin-top: 3em;
   background-color: #9c4e4e;
 }
+body #musicModal {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+}
+body #musicModal .modal {
+  display: block;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #musicModal .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+body #musicModal .modal-button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+body #musicModal .modal-button:hover {
+  background-color: #0056b3;
+}
 
 .paper {
   background-color: #ece7e7;

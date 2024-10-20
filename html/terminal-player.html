@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main-terminal.css">
     <title>The Last Resort - Terminal Player</title>
+    <script>
+        function PlayMusic() {
+            var play = document.getElementById("music");
+            play.play().catch(function (error) {
+                console.log("L'utilisateur doit d'abord interagir avec la page.");
+            });
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("musicModal").style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -46,6 +59,19 @@
         </div>
     </div>
     <div class="desk"></div>
+
+    <!-- Modale demandant la permission pour lancer la musique -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <p>Souhaitez-vous activer la musique de fond ?</p>
+            <button class="modal-button" onclick="PlayMusic()">Autoriser</button>
+        </div>
+    </div>
+    <!-- Lecture de l'audio sans barre de contrôle -->
+    <audio loop id="music" style="display:none;">
+        <source src="../music/musique jeu.wav" type="audio/mpeg">
+    </audio>
+
 
     <script type="module" src="../js/main.js"></script>
 

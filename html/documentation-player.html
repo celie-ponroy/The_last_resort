@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Last Resort - Documentation Player</title>
     <link rel="stylesheet" href="/css/main-documentation.css">
+    <script>
+        function PlayMusic() {
+            var play = document.getElementById("music");
+            play.play().catch(function (error) {
+                console.log("L'utilisateur doit d'abord interagir avec la page.");
+            });
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById("musicModal").style.display = "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -93,14 +106,15 @@
         <h2>Fonctionnement des propulseurs</h2>
         <h3>Initialisation</h3>
         <p>
-            Avant tout lancement ou relancement des propulseurs lancer le script repairPropellers.sh si les propulseurs ne sont pas réparés, lancer help.sh.
+            Avant tout lancement ou relancement des propulseurs lancer le script repairPropellers.sh si les propulseurs
+            ne sont pas réparés, lancer help.sh.
         </p>
 
         <h3>Lancement de propulseurs</h3>
         <p>
             Dans le dossier Navigation changer le fichier : </p>
         <ul>
-            <li> nav.txt :Uniquement si ce fichier existe. Si c'est le cas passez la variable nav_enable  à  faux.</li>
+            <li> nav.txt :Uniquement si ce fichier existe. Si c'est le cas passez la variable nav_enable à faux.</li>
             <li>navigation_conf.json :Dans ce fichier le max speed DOIT etre à 3.5.</li>
         </ul>
     </div>
@@ -108,16 +122,17 @@
         <h2>Température Systeme température systeme</h2>
         <h3>La température se trouve dans le fichier temperature_readings.json, il se trouve dans Data puis Sensor</h3>
         <p>
-            <h3>Attention si la première température est inférieure à -100:</h3>
-            <ul>
-                <li>1- lancer le script: run help.sh</li>
-                <li>2- ensuite lancer le script avec run nino.sh , avec run celie.sh et avec run matias.sh</li>
-            </ul>
+        <h3>Attention si la première température est inférieure à -100:</h3>
+        <ul>
+            <li>1- lancer le script: run help.sh</li>
+            <li>2- ensuite lancer le script avec run nino.sh , avec run celie.sh et avec run matias.sh</li>
+        </ul>
         </p>
 
         <h3>Si toutes les températures sont négatives:</h3>
         <ul>
-            <li>Cela n'est pas normal ça doit etre un oubli, mettre pour toues les valeurs remplacer le '-'' par '+'</li>
+            <li>Cela n'est pas normal ça doit etre un oubli, mettre pour toues les valeurs remplacer le '-'' par '+'
+            </li>
         </ul>
         <h3>Si une seule température est négative:</h3>
         <ul>
@@ -128,6 +143,22 @@
         <button id="prev" class="nav-button" disabled>&lt; Précédent</button>
         <button id="next" class="nav-button">&gt; Suivant</button>
     </div>
+
+
+
+
+    <!-- Modale demandant la permission pour lancer la musique -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <p>Souhaitez-vous activer la musique de fond ?</p>
+            <button class="modal-button" onclick="PlayMusic()">Autoriser</button>
+        </div>
+    </div>
+    <!-- Lecture de l'audio sans barre de contrôle -->
+    <audio loop id="music" style="display:none;">
+        <source src="../music/musique jeu.wav" type="audio/mpeg">
+    </audio>
+
 
     <script src="/js/page-skip.js"></script>
 </body>

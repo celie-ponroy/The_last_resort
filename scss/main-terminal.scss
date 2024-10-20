@@ -169,6 +169,13 @@ body {
                         display: none;
                         height: 85%;
                         font-size: 1em;
+                        resize: none;
+                    }
+
+                    /* Cacher la barre de défilement dans Chrome/Safari */
+                    #myTextarea::-webkit-scrollbar {
+                        display: none;
+                        /* Cache la barre de défilement */
                     }
 
                     #save-button {
@@ -254,7 +261,7 @@ body {
         }
 
         .post-it {
-            z-index: 1111;
+            z-index: 10;
             grid-column: 1;
 
             position: absolute;
@@ -279,7 +286,6 @@ body {
             margin-top: 2em;
             border: 0.5em ridge rgb(182, 174, 174);
             background-color: rgb(255, 255, 255);
-            z-index: 2;
             border-radius: 8px;
 
             grid-column: 2 / -1;
@@ -288,7 +294,7 @@ body {
             height: 15em;
 
             box-shadow: 0 0em 100em #000;
-
+            z-index: 1;
 
             font-family: "Playwrite GB S", bold;
             font-size: 1.2em;
