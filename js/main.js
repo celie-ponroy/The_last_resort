@@ -4,8 +4,9 @@ import { TheLastResort } from "./TheLastResort.js";
 import { File } from "./Arborescence.js";
 
 let theLastResort = new TheLastResort();
-let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify hello = true", "run repairElectricalSystems.sh"]);
-let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify hello = true", "run celie.sh"]);
+
+let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify electricty_enable = true", "run repairElectricalSystems.sh"])
+let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify orientation = true", "run celie.sh"]);
 let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["Documents>config.conf:'prop=true;'"]);
 
 
@@ -41,6 +42,11 @@ form.addEventListener('submit', (event) => {
  });
 */
 
+function scrollToBottom() {
+    const list = document.getElementById('scrollable-list');
+    list.scrollTop = list.scrollHeight; // Définit la position de défilement au bas du conteneur
+}
+
 theLastResort.updateQuestUI()
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const inputValue = userInput.value;
         theLastResort.executeCmd(inputValue);
+
+        scrollToBottom();
+
     });
 
     //save file
