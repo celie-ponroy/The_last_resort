@@ -102,6 +102,12 @@ export class Quest {
                 case 'test2.txt':    
                     compareTo = test2;
                     break;
+                case 'navigation_config.json':
+                    compareTo = configFile;
+                    break;
+                case 'temperature_readings.json':
+                    compareTo = temperatureFile;
+                    break;
 
             }
             res = this.compareContentFiles(compareTo,file.file_content);
@@ -147,3 +153,18 @@ const test2 = `TO DO LIST:
 - by some pasta
 - finish the code`;
 
+const configFile = `{
+    "navigation_system": "autonomous",
+    "waypoint_threshold": 0.5,
+    "max_speed": 3.5,
+    "obstacle_detection": true
+}`;
+
+let temperatureFile; //'temperature_readings.json');
+temperatureFile =`{
+    "readings": [
+        {"timestamp": "2024-10-20T12:00:00Z", "temperature": +50},
+        {"timestamp": "2024-10-20T12:10:00Z", "temperature": +49.5},
+        {"timestamp": "2024-10-20T12:20:00Z", "temperature": +49.0}
+    ]
+}`

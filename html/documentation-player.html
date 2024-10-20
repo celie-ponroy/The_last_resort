@@ -90,26 +90,39 @@
         </blockquote>
     </div>
     <div class="paper" id="paper3">
-        <h2>Titre de Document 3: Introduction aux Bases de Données</h2>
-        <h3>Qu'est-ce qu'une base de données ?</h3>
+        <h2>Fonctionnement des propulseurs</h2>
+        <h3>Initialisation</h3>
         <p>
-            Une base de données est un système organisé pour stocker, gérer et récupérer des données. Elle
-            est utilisée pour gérer les informations de manière efficace.
+            Avant tout lancement ou relancement des propulseurs lancer le script repairPropellers.sh si les propulseurs ne sont pas réparés, lancer help.sh.
         </p>
-        <h3>Types de Bases de Données</h3>
+
+        <h3>Lancement de propulseurs</h3>
+        <p>
+            Dans le dossier Navigation changer le fichier : </p>
         <ul>
-            <li><strong>Relationnelles :</strong> Utilisent des tables (ex: MySQL, PostgreSQL)</li>
-            <li><strong>NoSQL :</strong> Données non structurées (ex: MongoDB, Cassandra)</li>
-            <li><strong>Graphes :</strong> Modèle de données en graphes (ex: Neo4j)</li>
+            <li> nav.txt :Uniquement si ce fichier existe. Si c'est le cas passez la variable nav_enable  à  faux.</li>
+            <li>navigation_conf.json :Dans ce fichier le max speed DOIT etre à 3.5.</li>
         </ul>
-        <h3>Importance des Bases de Données</h3>
+    </div>
+    <div class="paper" id="paper4">
+        <h2>Température Systeme température systeme</h2>
+        <h3>La température se trouve dans le fichier temperature_readings.json, il se trouve dans Data puis Sensor</h3>
         <p>
-            Les bases de données sont cruciales pour les applications modernes, car elles permettent
-            de stocker et de gérer des volumes massifs d'informations de manière sécurisée.
+            <h3>Attention si la première température est inférieure à -100:</h3>
+            <ul>
+                <li>1- lancer le script: run help.sh</li>
+                <li>2- ensuite lancer le script avec run nino.sh , avec run celie.sh et avec run matias.sh</li>
+            </ul>
         </p>
-        <blockquote>
-            <p>"Les données sont le nouveau pétrole." - Clive Humby</p>
-        </blockquote>
+
+        <h3>Si toutes les températures sont négatives:</h3>
+        <ul>
+            <li>Cela n'est pas normal ça doit etre un oubli, mettre pour toues les valeurs remplacer le '-'' par '+'</li>
+        </ul>
+        <h3>Si une seule température est négative:</h3>
+        <ul>
+            <li>changer la troisiève valeur avec x telle que 0 = température1*x³ + 50</li>
+        </ul>
     </div>
     <div class="navigation">
         <button id="prev" class="nav-button" disabled>&lt; Précédent</button>

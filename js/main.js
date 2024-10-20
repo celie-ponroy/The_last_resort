@@ -7,12 +7,13 @@ let theLastResort = new TheLastResort();
 
 let quest1 = new Quest("Corrigé le système életrique du vaisseau", ["modify electricty_enable = true", "run repairElectricalSystems.sh"])
 let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify orientation_up = true", "run celie.sh"]);
-let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["Documents>config.conf:'prop=true;'"]);
-
+let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["run repairPropellers.sh","cd Navigation","edit navigation_conf.json"]);
+let quest4 = new Quest("Ajustement température systeme",["cd Data","cd Sensor","edit temperature_readings.json"]);
 
 theLastResort.addQuest(quest1);
 theLastResort.addQuest(quest2);
 theLastResort.addQuest(quest3);
+theLastResort.addQuest(quest4);
 
 /*
 //default values
