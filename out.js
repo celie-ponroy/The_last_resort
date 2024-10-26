@@ -1,251 +1,34 @@
-"use strict";
-(() => {
-  // js/Quest.js
-  var Quest = class {
-    constructor(name = "Quest", commandsParam = []) {
-      this.name = name;
-      this.finished = false;
-      this.executed = [];
-      for (let i = 0; i < commandsParam.length; i++) {
-        this.executed[i] = false;
-      }
-      this.commands = commandsParam;
-    }
-    getFinished() {
-      return this.finished;
-    }
-    getCurrent() {
-      let i;
-      for (i = 0; i < this.commands.length; i++) {
-        if (this.executed[i] == false) {
-          return i;
-        }
-      }
-      return i;
-    }
-    updateStatus() {
-      for (let i = 0; i < this.commands.length; i++) {
-        if (this.executed[i] == false) {
-          this.finished = false;
-          return;
-        }
-      }
-      this.finished = true;
-    }
-    checkVar(string) {
-      let equal = this.compareCommands(string);
-      if (equal) {
-        this.executed[this.getCurrent()] = true;
-        this.updateStatus();
-      }
-      return equal;
-    }
-    checkScript(command2) {
-      let equal = this.compareCommands(command2);
-      if (equal) {
-        this.executed[this.getCurrent()] = true;
-        this.updateStatus();
-      }
-      return equal;
-    }
-    compareCommands(string) {
-      let string1 = string.replace(/\s+/g, " ").trim();
-      let cmdCur = this.commands[this.getCurrent()];
-      let string2 = cmdCur.replace(/\s+/g, " ").trim();
-      return string1 === string2;
-    }
-    checkPathToConf(path) {
-      let equal = this.compareCommands(command);
-      if (equal) {
-        this.executed[this.getCurrent()] = true;
-        this.updateStatus();
-      }
-      return equal;
-    }
-    compareContentFiles(str1, str2) {
-      const normalizeString = (str) => {
-        if (typeof str !== "string") return "";
-        return str.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\r\n]+/g, " ");
-      };
-      return normalizeString(str1) === normalizeString(str2);
-    }
-    checkEdit(file) {
-      let command2 = this.commands[this.getCurrent()];
-      let res = false;
-      if (command2.includes(".")) {
-        let compareTo;
-        switch (file.file_name) {
-          case "test.txt":
-            compareTo = test;
-            break;
-          case "test2.txt":
-            compareTo = test2;
-            break;
-          case "navigation_config.json":
-            compareTo = configFile;
-            break;
-          case "temperature_readings.json":
-            compareTo = temperatureFile;
-            break;
-        }
-        res = this.compareContentFiles(compareTo, file.file_content);
-        const normalizeString = (str) => {
-          if (typeof str !== "string") return "";
-          return str.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\r\n]+/g, " ");
-        };
-        if (res) {
-          this.executed[this.getCurrent()] = true;
-          this.updateStatus();
-        }
-      }
-      return res;
-    }
-    checkCD(string) {
-      let equal = this.compareCommands(string);
-      if (equal) {
-        this.executed[this.getCurrent()] = true;
-        this.updateStatus();
-      }
-      return equal;
-    }
-  };
-  var test = `udp        tpi_clts      v     inet     udp     -       -
+"use strict"; (() => {
+    var l = class { constructor(e = "Quest", t = []) { this.name = e, this.finished = !1, this.executed = []; for (let r = 0; r < t.length; r++)this.executed[r] = !1; this.commands = t } getFinished() { return this.finished } getCurrent() { let e; for (e = 0; e < this.commands.length; e++)if (this.executed[e] == !1) return e; return e } updateStatus() { for (let e = 0; e < this.commands.length; e++)if (this.executed[e] == !1) { this.finished = !1; return } this.finished = !0 } checkVar(e) { let t = this.compareCommands(e); return t && (this.executed[this.getCurrent()] = !0, this.updateStatus()), t } checkScript(e) { let t = this.compareCommands(e); return t && (this.executed[this.getCurrent()] = !0, this.updateStatus()), t } compareCommands(e) { let t = e.replace(/\s+/g, " ").trim(), s = this.commands[this.getCurrent()].replace(/\s+/g, " ").trim(); return t === s } checkPathToConf(e) { let t = this.compareCommands(command); return t && (this.executed[this.getCurrent()] = !0, this.updateStatus()), t } compareContentFiles(e, t) { let r = s => typeof s != "string" ? "" : s.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\r\n]+/g, " "); return r(e) === r(t) } checkEdit(e) { let t = this.commands[this.getCurrent()], r = !1; if (t.includes(".")) { let s; switch (e.file_name) { case "test.txt": s = A; break; case "test2.txt": s = N; break; case "navigation_config.json": s = q; break; case "temperature_readings.json": s = k; break }r = this.compareContentFiles(s, e.file_content); let u = d => typeof d != "string" ? "" : d.trim().toLowerCase().replace(/\s+/g, " ").replace(/[\r\n]+/g, " "); r && (this.executed[this.getCurrent()] = !0, this.updateStatus()) } return r } checkCD(e) { let t = this.compareCommands(e); return t && (this.executed[this.getCurrent()] = !0, this.updateStatus()), t } }, A = `udp        tpi_clts      v     inet     udp     -       -
     tcp        tpi_cots_ord  v     inet     tcp     -       -
     udp6       tpi_clts      v     inet6    udp     -       -
     tcp6       tpi_cots_ord  v     inet6    tcp     -       -
     rawip      tpi_raw       -     inet      -      -       -
     local      tpi_cots_ord  V     loopback  -      -       -
-    unix       tpi_cots_ord  -     loopback  -      -       -`;
-  var test2 = `TO DO LIST:
+    unix       tpi_cots_ord  -     loopback  -      -       -`, N = `TO DO LIST:
 - by some pasta
-- finish the code`;
-  var configFile = `{
+- finish the code`, q = `{
     "navigation_system": "autonomous",
     "waypoint_threshold": 0.5,
     "max_speed": 3.5,
     "obstacle_detection": true
-}`;
-  var temperatureFile;
-  temperatureFile = `{
+}`, k; k = `{
     "readings": [
         {"timestamp": "2024-10-20T12:00:00Z", "temperature": +50},
         {"timestamp": "2024-10-20T12:10:00Z", "temperature": +49.5},
         {"timestamp": "2024-10-20T12:20:00Z", "temperature": +49.0}
     ]
-}`;
-
-  // js/Arborescence.js
-  var Directory = class _Directory {
-    constructor(dir_name, dir_parent) {
-      this.dir_name = dir_name;
-      this.dir_parent = dir_parent;
-      this.dir_array = [];
-    }
-    addToDirectory(child) {
-      this.dir_array.push(child);
-    }
-    deleteFromDirectory(child) {
-      if (child.includes(".")) {
-        let file = this.getFileByName(child);
-        if (file !== null) {
-          const index = this.dir_array.indexOf(file);
-          if (index !== -1) {
-            this.dir_array.splice(index, 1);
-            console.log(`${child} a \xE9t\xE9 supprim\xE9 du r\xE9pertoire.`);
-          }
-        } else {
-          console.log(`${child} n'existe pas dans ce r\xE9pertoire.`);
+}`; var a = class n {
+        constructor(e, t) { this.dir_name = e, this.dir_parent = t, this.dir_array = [] } addToDirectory(e) { this.dir_array.push(e) } deleteFromDirectory(e) { if (e.includes(".")) { let t = this.getFileByName(e); if (t !== null) { let r = this.dir_array.indexOf(t); r !== -1 && (this.dir_array.splice(r, 1), console.log(`${e} a \xE9t\xE9 supprim\xE9 du r\xE9pertoire.`)) } else console.log(`${e} n'existe pas dans ce r\xE9pertoire.`) } else { let t = this.getDirectoryByName(e); if (t !== null) { let r = this.dir_array.indexOf(t); r !== -1 && (this.dir_array.splice(r, 1), console.log(`${e} a \xE9t\xE9 supprim\xE9 du r\xE9pertoire.`)) } else console.log(`Le r\xE9pertoire ${e} n'existe pas dans ce r\xE9pertoire.`) } } getDirectoryByName(e) { let t = null; for (let r = 0; r < this.dir_array.length; r++)this.dir_array[r] instanceof n && this.dir_array[r].dir_name == e && (t = this.dir_array[r]); return t } getFileByName(e) { let t = null; for (let r = 0; r < this.dir_array.length; r++)this.dir_array[r] instanceof o && this.dir_array[r].file_name == e && (t = this.dir_array[r]); return t } toString() {
+            let e = `${this.dir_name}`; for (let t of this.dir_array) t instanceof n && (e += `  ${t.dir_name}
+`); return e
         }
-      } else {
-        let directory = this.getDirectoryByName(child);
-        if (directory !== null) {
-          const index = this.dir_array.indexOf(directory);
-          if (index !== -1) {
-            this.dir_array.splice(index, 1);
-            console.log(`${child} a \xE9t\xE9 supprim\xE9 du r\xE9pertoire.`);
-          }
-        } else {
-          console.log(`Le r\xE9pertoire ${child} n'existe pas dans ce r\xE9pertoire.`);
-        }
-      }
-    }
-    getDirectoryByName(name_dir) {
-      let retour = null;
-      for (let i = 0; i < this.dir_array.length; i++) {
-        if (this.dir_array[i] instanceof _Directory && this.dir_array[i].dir_name == name_dir) {
-          retour = this.dir_array[i];
-        }
-      }
-      return retour;
-    }
-    getFileByName(name_file) {
-      let retour = null;
-      for (let i = 0; i < this.dir_array.length; i++) {
-        if (this.dir_array[i] instanceof File && this.dir_array[i].file_name == name_file) {
-          retour = this.dir_array[i];
-        }
-      }
-      return retour;
-    }
-    toString() {
-      let result = `${this.dir_name}`;
-      for (let item of this.dir_array) {
-        if (item instanceof _Directory) {
-          result += `  ${item.dir_name}
-`;
-        }
-      }
-      return result;
-    }
-  };
-  var File = class {
-    constructor(file_name) {
-      this.file_name = file_name;
-      this.file_content = "";
-    }
-    editFile(content) {
-      this.file_content = content;
-    }
-    toString(level = 0) {
-      let indent = "  ".repeat(level);
-      return `${indent} ${this.file_name}`;
-    }
-  };
-  var main_directory = new Directory("SpaceRobot", null);
-  main_directory.addToDirectory(new Directory("Navigation", main_directory));
-  main_directory.addToDirectory(new Directory("Communication", main_directory));
-  main_directory.addToDirectory(new Directory("Data", main_directory));
-  main_directory.addToDirectory(new Directory("Maintenance", main_directory));
-  main_directory.addToDirectory(new Directory("Science", main_directory));
-  var pathfinding_directory = new Directory("Pathfinding", main_directory.getDirectoryByName("Navigation"));
-  main_directory.getDirectoryByName("Navigation").addToDirectory(pathfinding_directory);
-  pathfinding_directory.addToDirectory(new File("astar_algorithm.py"));
-  pathfinding_directory.addToDirectory(new File("waypoint_coordinates.csv"));
-  var telemetry_directory = new Directory("Telemetry", main_directory.getDirectoryByName("Communication"));
-  main_directory.getDirectoryByName("Communication").addToDirectory(telemetry_directory);
-  telemetry_directory.addToDirectory(new File("signal_logs.txt"));
-  telemetry_directory.addToDirectory(new File("transmission_report.csv"));
-  var sensor_data_directory = new Directory("Sensor", main_directory.getDirectoryByName("Data"));
-  main_directory.getDirectoryByName("Data").addToDirectory(sensor_data_directory);
-  sensor_data_directory.addToDirectory(new File("temperature_readings.json"));
-  sensor_data_directory.addToDirectory(new File("pressure_readings.json"));
-  var repair_directory = new Directory("Repair", main_directory.getDirectoryByName("Maintenance"));
-  main_directory.getDirectoryByName("Maintenance").addToDirectory(repair_directory);
-  repair_directory.addToDirectory(new File("tool_inventory.txt"));
-  repair_directory.addToDirectory(new File("repair_manual.pdf"));
-  var experiments_directory = new Directory("Experiments", main_directory.getDirectoryByName("Science"));
-  main_directory.getDirectoryByName("Science").addToDirectory(experiments_directory);
-  experiments_directory.addToDirectory(new File("gravity_test_results.txt"));
-  experiments_directory.addToDirectory(new File("sample_analysis.csv"));
-  var configFile2 = new File("navigation_config.json");
-  configFile2.editFile(`{
+    }, o = class { constructor(e) { this.file_name = e, this.file_content = "" } editFile(e) { this.file_content = e } toString(e = 0) { return `${"  ".repeat(e)} ${this.file_name}` } }, i = new a("SpaceRobot", null); i.addToDirectory(new a("Navigation", i)); i.addToDirectory(new a("Communication", i)); i.addToDirectory(new a("Data", i)); i.addToDirectory(new a("Maintenance", i)); i.addToDirectory(new a("Science", i)); var b = new a("Pathfinding", i.getDirectoryByName("Navigation")); i.getDirectoryByName("Navigation").addToDirectory(b); b.addToDirectory(new o("astar_algorithm.py")); b.addToDirectory(new o("waypoint_coordinates.csv")); var T = new a("Telemetry", i.getDirectoryByName("Communication")); i.getDirectoryByName("Communication").addToDirectory(T); T.addToDirectory(new o("signal_logs.txt")); T.addToDirectory(new o("transmission_report.csv")); var m = new a("Sensor", i.getDirectoryByName("Data")); i.getDirectoryByName("Data").addToDirectory(m); m.addToDirectory(new o("temperature_readings.json")); m.addToDirectory(new o("pressure_readings.json")); var D = new a("Repair", i.getDirectoryByName("Maintenance")); i.getDirectoryByName("Maintenance").addToDirectory(D); D.addToDirectory(new o("tool_inventory.txt")); D.addToDirectory(new o("repair_manual.pdf")); var v = new a("Experiments", i.getDirectoryByName("Science")); i.getDirectoryByName("Science").addToDirectory(v); v.addToDirectory(new o("gravity_test_results.txt")); v.addToDirectory(new o("sample_analysis.csv")); var I = new o("navigation_config.json"); I.editFile(`{
     "navigation_system": "autonomous",
     "waypoint_threshold": 0.5,
     "max_speed": 2.5,
     "obstacle_detection": true
-}`);
-  var orientation_log = new File("orientation.log");
-  orientation_log.editFile(`<20/10/2024> - D\xE9but de l'analyse de l'ast\xE9ro\xEFde 234 dans la ceinture principale.
+}`); var E = new o("orientation.log"); E.editFile(`<20/10/2024> - D\xE9but de l'analyse de l'ast\xE9ro\xEFde 234 dans la ceinture principale.
 \xC9tat du syst\xE8me : OK
 
 <20/10/2024 14:00 UTC> - Orientation initiale r\xE9gl\xE9e \xE0 45\xB0N, 30\xB0E.
@@ -265,353 +48,40 @@ Ajustement : 60\xB0N, 15\xB0E pour images haute r\xE9solution.
 Statut : En attente de nouvelles instructions.
 
 <20/10/2024 18:24 UTC> - Collision avec la Terre Iminent
-\xC9tat du syst\xE8me : <!> PROBLEME <!>`);
-  main_directory.getDirectoryByName("Navigation").addToDirectory(orientation_log);
-  main_directory.getDirectoryByName("Navigation").addToDirectory(configFile2);
-  var temperatureFile2 = sensor_data_directory.getFileByName("temperature_readings.json");
-  temperatureFile2.editFile(`{
+\xC9tat du syst\xE8me : <!> PROBLEME <!>`); i.getDirectoryByName("Navigation").addToDirectory(E); i.getDirectoryByName("Navigation").addToDirectory(I); var U = m.getFileByName("temperature_readings.json"); U.editFile(`{
     "readings": [
         {"timestamp": "2024-10-20T12:00:00Z", "temperature": -50},
         {"timestamp": "2024-10-20T12:10:00Z", "temperature": -49.5},
         {"timestamp": "2024-10-20T12:20:00Z", "temperature": -49.0}
     ]
-}`);
-  sensor_data_directory.addToDirectory(new File("humidity_readings.json"));
-  console.log(main_directory.toString());
-
-  // js/Commands.js
-  var Command = class {
-    constructor() {
-    }
-    execute() {
-    }
-  };
-  var Script = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(string) {
-      let res = "";
-      switch (string.split(" ")[1]) {
-        case "altf4.sh":
-          res = "Cr\xE9dits:\nAmaglio Matias: son \nArcelin Nino: htlm/scss et devellopement backend\nPonroy C\xE9lie: devellopement backend--------------------------------------------------";
-          break;
-        case "help.sh":
-          res = "HAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-          break;
-        case "nino.sh":
-          res = "nino to the rescue";
-          break;
-        case "matias.sh":
-          res = "you bought a cookie to matias he will help you";
-          break;
-        case "celie.sh":
-          res = "its all good celie helped you :)";
-          break;
-        case "repairPropellers.sh":
-        case "repairBattery.sh":
-        case "repairTankLeaks.sh":
-        case "repairElectricalSystems.sh":
-          res = "repairing ...\nrepaired !";
-          break;
-      }
-      return res;
-    }
-  };
-  var Edit = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(file_name, current_dir) {
-      const list = document.getElementById("scrollable-list");
-      list.style.display = "none";
-      let file = current_dir.getFileByName(file_name);
-      if (file && file.file_content !== void 0) {
-        const label = document.querySelector('label[for="user-input"]');
-        label.textContent = "Edition Mode :";
-        const input = document.getElementById("user-input");
-        const textarea = document.getElementById("editable-textarea");
-        const savebutton = document.getElementById("save-button");
-        input.style.display = "none";
-        textarea.style.display = "block";
-        savebutton.style.display = "block";
-        textarea.value = file.file_content;
-        return file;
-      } else {
-        console.error("Fichier non trouv\xE9 ou vide.");
-      }
-    }
-  };
-  var Create = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(argument, current_dir) {
-      if (argument.includes(".")) {
-        console.log("L'argument contient un point.");
-        current_dir.addToDirectory(new File(argument));
-      } else {
-        console.log("L'argument ne contient pas de point.");
-        current_dir.addToDirectory(new Directory(argument, current_dir));
-      }
-    }
-  };
-  var Delete = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(argument, current_dir) {
-      current_dir.deleteFromDirectory(argument);
-    }
-  };
-  var Cd = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(argument, current_dir) {
-      switch (argument) {
-        case "..":
-          return current_dir.dir_parent;
-        default:
-          return current_dir.getDirectoryByName(argument);
-      }
-    }
-  };
-  var Liste = class extends Command {
-    constructor() {
-      super();
-    }
-    execute(dir_array) {
-      let retour = "";
-      for (let i = 0; i < dir_array.length; i++) {
-        if (dir_array[i] instanceof Directory)
-          retour += dir_array[i].dir_name + " | ";
-        else
-          retour += dir_array[i].file_name + " | ";
-      }
-      return retour;
-    }
-  };
-
-  // js/TheLastResort.js
-  var TheLastResort = class {
-    constructor() {
-      this.current_dir = main_directory;
-      this.current_file = "";
-      this.current = 0;
-      this.quests = [];
-      this.now = 0;
-      this.initial = 0;
-      this.countDownDate = 0;
-      this.timeleft = 0;
-      this.initTimer(5);
-    }
-    addQuest(quest) {
-      this.updateCurrent();
-      this.quests.push(quest);
-      this.initNameQuestsUI(quest);
-    }
-    executeCmd(string = "") {
-      let editabletextarea = document.getElementById("editable-textarea");
-      if (editabletextarea.style.display !== "block") {
-        this.addcommandToUI(string);
-        let command2 = string.split(" ");
-        switch (command2[0]) {
-          case "edit":
-            if (command2[1].includes(".")) {
-              this.current_file = new Edit().execute(command2[1], this.current_dir);
-            } else
-              this.addResultToUI("Something went wrong :(");
-            break;
-          case "modify":
-            this.quests[this.current].checkVar(string);
-            this.clearPrompt();
-            break;
-          case "create":
-            new Create().execute(command2[1], this.current_dir);
-            this.clearPrompt();
-            break;
-          case "delete":
-            new Delete().execute(command2[1], this.current_dir);
-            this.clearPrompt();
-            break;
-          case "ls":
-            this.addResultToUI(new Liste().execute(this.current_dir.dir_array));
-            this.clearPrompt();
-            break;
-          case "cd":
-            let cd = new Cd();
-            let new_current_dir = cd.execute(command2[1], this.current_dir);
-            console.log(new_current_dir);
-            if (new_current_dir == null)
-              this.addResultToUI("Something went wrong :(");
-            else {
-              this.current_dir = new_current_dir;
-              this.quests[this.current].checkCD(string);
-            }
-            this.clearPrompt();
-            break;
-          case "run":
-            let script = new Script();
-            let res = script.execute(string);
-            this.quests[this.current].checkScript(string);
-            this.addResultToUI(res);
-            this.clearPrompt();
-            break;
-          case "clear":
-            this.replaceUI();
-            break;
+}`); m.addToDirectory(new o("humidity_readings.json")); console.log(i.toString()); var c = class { constructor() { } execute() { } }, p = class extends c {
+        constructor() { super() } execute(e) {
+            let t = ""; switch (e.split(" ")[1]) {
+                case "altf4.sh": t = `Cr\xE9dits:
+Amaglio Matias: son 
+Arcelin Nino: htlm/scss et devellopement backend
+Ponroy C\xE9lie: devellopement backend--------------------------------------------------`; break; case "help.sh": t = "HAAAAAAAAAAAAAAAAAAAAAAAAAAA"; break; case "nino.sh": t = "nino to the rescue"; break; case "matias.sh": t = "you bought a cookie to matias he will help you"; break; case "celie.sh": t = "its all good celie helped you :)"; case "valentin.sh": t = "mini panier de basket :0"; break; case "celien.sh": t = "LA PUISSANCE DU NOMBRILAX"; break; case "shieldDiagnostic.sh": t = "Shield power too low, 'shield_strength' must be at 100"; break; case "repairPropellers.sh": case "fuelBalance.sh": case "calibrateGravity.sh": case "syncCommSystem.sh": case "repairBattery.sh": case "repairTankLeaks.sh": case "repairElectricalSystems.sh": t = `repairing ...
+repaired !`; break
+            }return t
         }
-      } else {
-        this.current_file.editFile(editabletextarea.value);
-        editabletextarea.value = "";
-        editabletextarea.style.display = "none";
-        document.getElementById("user-input").style.display = "";
-        document.getElementById("user-input").value = "";
-        document.getElementById("save-button").style.display = "none";
-        const label = document.querySelector('label[for="user-input"]');
-        label.textContent = "";
-        document.getElementById("scrollable-list").style.display = "block";
-        this.quests[this.current].checkEdit(this.current_file);
-        this.addResultToUI("File edited :)");
-      }
-      this.updateCurrent();
-      this.updateQuestUI();
-      this.updateStatus();
-    }
-    updateCurrent() {
-      let i = 0;
-      for (i = 0; i < this.quests.length; i++) {
-        if (this.quests[i].getFinished() == false) {
-          break;
-        }
-      }
-      this.current = i;
-    }
-    updateStatus() {
-      for (let i = 0; i < this.quests.length; i++) {
-        if (this.quests[i].getFinished() == false) {
-          return;
-        }
-      }
-      this.stopTimer();
-      this.finish(true);
-    }
-    addcommandToUI(command2) {
-      const ulElement = document.querySelector(".screen ul");
-      const newListItem = document.createElement("li");
-      newListItem.textContent = command2;
-      ulElement.appendChild(newListItem);
-    }
-    addResultToUI(command2) {
-      const ulElement = document.querySelector(".screen ul");
-      const newItem = document.createElement("p");
-      newItem.textContent = command2;
-      ulElement.appendChild(newItem);
-    }
-    replaceUI(string = "") {
-      const ulElement = document.querySelector(".screen ul");
-      const finishText = document.createElement("p");
-      finishText.textContent = string;
-      ulElement.replaceChildren(finishText);
-    }
-    nameQuestsUI() {
-      let questElements = document.getElementById("list-quest");
-      console.log("questElements" + questElements);
-      let i = 0;
-      this.quests.forEach((quest) => {
-        let li = document.createElement("li");
-        console.log("li ; " + li);
-        li.innerHTML = `
+    }, y = class extends c { constructor() { super() } execute(e, t) { let r = document.getElementById("scrollable-list"); r.style.display = "none"; let s = t.getFileByName(e); if (s && s.file_content !== void 0) { let u = document.querySelector('label[for="user-input"]'); u.textContent = "Edition Mode :"; let d = document.getElementById("user-input"), h = document.getElementById("editable-textarea"), B = document.getElementById("save-button"); return d.style.display = "none", h.style.display = "block", B.style.display = "block", h.value = s.file_content, s } else console.error("Fichier non trouv\xE9 ou vide.") } }, g = class extends c { constructor() { super() } execute(e, t) { e.includes(".") ? (console.log("L'argument contient un point."), t.addToDirectory(new o(e))) : (console.log("L'argument ne contient pas de point."), t.addToDirectory(new a(e, t))) } }, f = class extends c { constructor() { super() } execute(e, t) { t.deleteFromDirectory(e) } }, _ = class extends c { constructor() { super() } execute(e, t) { switch (e) { case "..": return t.dir_parent; default: return t.getDirectoryByName(e) } } }, x = class extends c { constructor() { super() } execute(e) { let t = ""; for (let r = 0; r < e.length; r++)e[r] instanceof a ? t += e[r].dir_name + " | " : t += e[r].file_name + " | "; return t } }; var S = 1, w = class {
+        constructor() { this.current_dir = i, this.current_file = "", this.current = 0, this.quests = [], this.now = 0, this.initial = 0, this.countDownDate = 0, this.timeleft = 0, this.initTimer(15) } addQuest(e) { this.updateCurrent(), this.quests.push(e), this.initNameQuestsUI(e) } executeCmd(e = "") { let t = document.getElementById("editable-textarea"); if (t.style.display !== "block") { this.addcommandToUI(e); let r = e.split(" "); switch (r[0]) { case "edit": this.current_dir.getFileByName(r[1]) ? this.current_file = new y().execute(r[1], this.current_dir) : this.addResultToUI("Something went wrong :("); break; case "modify": this.quests[this.current].checkVar(e), this.clearPrompt(); break; case "create": new g().execute(r[1], this.current_dir), this.clearPrompt(); break; case "delete": new f().execute(r[1], this.current_dir), this.clearPrompt(); break; case "ls": this.addResultToUI(new x().execute(this.current_dir.dir_array)), this.clearPrompt(); break; case "cd": let u = new _().execute(r[1], this.current_dir); console.log(u), u == null ? this.addResultToUI("Something went wrong :(") : (this.current_dir = u, this.quests[this.current].checkCD(e)), this.clearPrompt(); break; case "run": let h = new p().execute(e); this.quests[this.current].checkScript(e), this.addResultToUI(h), this.clearPrompt(); break; case "clear": this.replaceUI(); break } } else { this.current_file.editFile(t.value), t.value = "", t.style.display = "none", document.getElementById("user-input").style.display = "", document.getElementById("user-input").value = "", document.getElementById("save-button").style.display = "none"; let r = document.querySelector('label[for="user-input"]'); r.textContent = "", document.getElementById("scrollable-list").style.display = "block", this.quests[this.current].checkEdit(this.current_file), this.addResultToUI("File edited :)") } this.updateCurrent(), this.updateQuestUI(), this.updateStatus() } updateCurrent() { let e = 0; for (e = 0; e < this.quests.length && this.quests[e].getFinished() != !1; e++); this.current = e } updateStatus() { for (let e = 0; e < this.quests.length; e++)if (this.quests[e].getFinished() == !1) return; this.stopTimer(), this.finish(!0) } addcommandToUI(e) { let t = document.querySelector(".screen ul"), r = document.createElement("li"); r.textContent = e, t.appendChild(r) } addResultToUI(e) { let t = document.querySelector(".screen ul"), r = document.createElement("p"); r.textContent = e, t.appendChild(r) } replaceUI(e = "") { let t = document.querySelector(".screen ul"), r = document.createElement("p"); r.textContent = e, t.replaceChildren(r) } nameQuestsUI() {
+            let e = document.getElementById("list-quest"); console.log("questElements" + e); let t = 0; this.quests.forEach(r => {
+                let s = document.createElement("li"); console.log("li ; " + s), s.innerHTML = `
                 <div class="checkbox-wrapper-19">
-                    <input type="checkbox" id="${i + 1}" />
-                    <label for="${i + 1}" class="check-box"></label>
+                    <input type="checkbox" id="${t + 1}" />
+                    <label for="${t + 1}" class="check-box"></label>
                 </div>
-                ${quest.name}`;
-        questElements.appendChild(li);
-        i++;
-      });
-    }
-    initNameQuestsUI(quest) {
-      let i = this.quests.length;
-      let questElements = document.getElementById("list-quest");
-      let li = document.createElement("li");
-      console.log("li ; " + li);
-      li.innerHTML = `
+                ${r.name}`, e.appendChild(s), t++
+            })
+        } initNameQuestsUI(e) {
+            let t = this.quests.length, r = document.getElementById("list-quest"), s = document.createElement("li"); console.log("li ; " + s), s.innerHTML = `
             <div class="checkbox-wrapper-19">
-                <input type="checkbox" id="${i}" disabled />
-                <label for="${i}" class="check-box"></label>
+                <input type="checkbox" id="${t}" disabled />
+                <label for="${t}" class="check-box"></label>
             </div>
-            ${quest.name}`;
-      questElements.appendChild(li);
-    }
-    updateQuestUI() {
-      for (let index = 0; index < this.quests.length; index++) {
-        let checkbox = document.getElementById(index + 1);
-        checkbox.checked = this.quests[index].getFinished();
-      }
-    }
-    finish(win) {
-      if (!win) {
-        this.replaceUI("Oh no the robot was exploded :(  the atmosphere will still be dirty");
-      }
-      if (win)
-        this.replaceUI("Well done you saved the earth!!");
-    }
-    clearPrompt() {
-      const form = document.querySelector("#user-form");
-      form.reset();
-    }
-    // Initialize Timer
-    initTimer(timeinitial) {
-      this.timeinitial = timeinitial;
-      this.now = (/* @__PURE__ */ new Date()).getTime();
-      this.countDownDate = this.now + this.timeinitial * 6e4;
-      this.timerInterval = setInterval(() => this.updateTimer(), 1e3);
-    }
-    // Update Timer
-    updateTimer() {
-      this.now = (/* @__PURE__ */ new Date()).getTime();
-      this.timeleft = this.countDownDate - this.now;
-      let minutes = Math.floor(this.timeleft % (1e3 * 60 * 60) / (1e3 * 60));
-      let seconds = Math.floor(this.timeleft % (1e3 * 60) / 1e3);
-      let time = `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-      document.getElementById("timer-value").innerHTML = time;
-      if (this.timeleft <= 0) {
-        document.getElementById("timer-value").innerHTML = "00:00";
-        this.stopTimer();
-        this.finish(false);
-      }
-    }
-    // Stop Timer
-    stopTimer() {
-      clearInterval(this.timerInterval);
-    }
-  };
-
-  // js/main.js
-  var theLastResort = new TheLastResort();
-  var quest1 = new Quest("Corriger le syst\xE8me \xE9letrique du vaisseau", ["modify electricty_enable = true", "run repairElectricalSystems.sh"]);
-  var quest2 = new Quest("Contr\xF4ler le syst\xE8me d'orientation du vaisseau", ["modify orientation_up = true", "run celie.sh"]);
-  var quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["run repairPropellers.sh", "cd Navigation", "edit navigation_conf.json"]);
-  var quest4 = new Quest("Ajustement temp\xE9rature systeme", ["cd Data", "cd Sensor", "edit temperature_readings.json"]);
-  theLastResort.addQuest(quest1);
-  theLastResort.addQuest(quest2);
-  theLastResort.addQuest(quest3);
-  theLastResort.addQuest(quest4);
-  function scrollToBottom() {
-    const list = document.getElementById("scrollable-list");
-    list.scrollTop = list.scrollHeight;
-  }
-  theLastResort.updateQuestUI();
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("#user-form");
-    const userInput = document.querySelector("#user-input");
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const inputValue = userInput.value;
-      theLastResort.executeCmd(inputValue);
-      scrollToBottom();
-    });
-  });
+            ${S + " - " + e.name}`, r.appendChild(s), S++
+        } updateQuestUI() { for (let e = 0; e < this.quests.length; e++) { let t = document.getElementById(e + 1); t.checked = this.quests[e].getFinished() } } finish(e) { e || this.replaceUI("Oh no the robot was exploded :(  the atmosphere will still be dirty"), e && this.replaceUI("Well done you saved the earth!!"), this.replaceUI("Your time -->" + this.timeleft) } clearPrompt() { document.querySelector("#user-form").reset() } initTimer(e) { this.timeinitial = e, this.now = new Date().getTime(), this.countDownDate = this.now + this.timeinitial * 6e4, this.timerInterval = setInterval(() => this.updateTimer(), 1e3) } updateTimer() { this.now = new Date().getTime(), this.timeleft = this.countDownDate - this.now; let e = Math.floor(this.timeleft % (1e3 * 60 * 60) / (1e3 * 60)), t = Math.floor(this.timeleft % (1e3 * 60) / 1e3), r = `${e < 10 ? "0" + e : e}:${t < 10 ? "0" + t : t}`; document.getElementById("timer-value").innerHTML = r, this.timeleft <= 0 && (document.getElementById("timer-value").innerHTML = "00:00", this.stopTimer(), this.finish(!1)) } stopTimer() { clearInterval(this.timerInterval) }
+    }; var C = new w, F = [new l("Corriger le syst\xE8me \xE9lectrique du vaisseau", ["modify electricity_enable = true", "run repairElectricalSystems.sh"]), new l("Contr\xF4ler le syst\xE8me d'orientation du vaisseau", ["modify orientation_up = true", "run celie.sh"]), new l("Configuration des propulseurs", ["run repairPropellers.sh", "edit navigation_config.json"]), new l("Ajustement temp\xE9rature syst\xE8me", ["edit temperature_readings.json"]), new l("R\xE9gler le niveau de carburant", ["run fuelBalance.sh"]), new l("V\xE9rifier l'int\xE9grit\xE9 du bouclier", ["run shieldDiagnostic.sh", "modify shield_strength = 100"]), new l("Calibrer les senseurs de gravit\xE9", ["run calibrateGravity.sh"]), new l("Synchroniser les syst\xE8mes de communication", ["run syncCommSystem.sh"])]; function L(n, e) { let t = []; for (; t.length < e;) { let r = n[Math.floor(Math.random() * n.length)]; t.includes(r) || t.push(r) } return t } var M = L(F, 4); M.forEach(n => C.addQuest(n)); function $() { let n = document.getElementById("scrollable-list"); n.scrollTop = n.scrollHeight } C.updateQuestUI(); document.addEventListener("DOMContentLoaded", () => { let n = document.querySelector("#user-form"), e = document.querySelector("#user-input"); n.addEventListener("submit", t => { t.preventDefault(); let r = e.value; C.executeCmd(r), $() }) });
 })();
+//# sourceMappingURL=out.js.map
