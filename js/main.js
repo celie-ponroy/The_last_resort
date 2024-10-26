@@ -5,43 +5,33 @@ import { File } from "./Arborescence.js";
 
 let theLastResort = new TheLastResort();
 
-let quest1 = new Quest("Corriger le système életrique du vaisseau", ["modify electricty_enable = true", "run repairElectricalSystems.sh"])
-let quest2 = new Quest("Contrôler le système d'orientation du vaisseau", ["modify orientation_up = true", "run celie.sh"]);
-let quest3 = new Quest("Ajout du fichier de configuration des propulseurs", ["run repairPropellers.sh","cd Navigation","edit navigation_conf.json"]);
-let quest4 = new Quest("Ajustement température systeme",["cd Data","cd Sensor","edit temperature_readings.json"]);
+const quests = [
+    new Quest("Corriger le système électrique du vaisseau", ["modify electricity_enable = true", "run repairElectricalSystems.sh"]),
+    new Quest("Contrôler le système d'orientation du vaisseau", ["modify orientation_up = true", "run celie.sh"]),
+    new Quest("Configuration des propulseurs", ["run repairPropellers.sh", "edit navigation_config.json"]),
+    new Quest("Ajustement température système", ["edit temperature_readings.json"]),
+    new Quest("Régler le niveau de carburant", ["run fuelBalance.sh"]),
+    new Quest("Vérifier l'intégrité du bouclier", ["run shieldDiagnostic.sh", "modify shield_strength = 100"]),
+    new Quest("Calibrer les senseurs de gravité", ["run calibrateGravity.sh"]),
+    new Quest("Synchroniser les systèmes de communication", ["run syncCommSystem.sh"])
+];
 
-theLastResort.addQuest(quest1);
-theLastResort.addQuest(quest2);
-theLastResort.addQuest(quest3);
-theLastResort.addQuest(quest4);
+// Fonction pour choisir 4 quêtes aléatoires sans répétition
+function getRandomQuests(questArray, numQuests) {
+    let selectedQuests = [];
+    while (selectedQuests.length < numQuests) {
+        let randomQuest = questArray[Math.floor(Math.random() * questArray.length)];
+        if (!selectedQuests.includes(randomQuest)) {
+            selectedQuests.push(randomQuest);
+        }
+    }
+    return selectedQuests;
+}
 
-/*
-//default values
-theLastResort.executeCmd("modify hello = true");
+// Sélection et ajout des quêtes
+const randomQuests = getRandomQuests(quests, 4);
+randomQuests.forEach(quest => theLastResort.addQuest(quest));
 
-theLastResort.executeCmd("run celie.sh");
-
-theLastResort.executeCmd('ls');
-theLastResort.executeCmd("run repairElectricalSystems.sh");
-console.log("quest1.finished"+quest1.finished);
-
-theLastResort.executeCmd('cd Documents');
-
-theLastResort.executeCmd('ls');
-
-theLastResort.executeCmd('cd ..');
-
-theLastResort.executeCmd('ls');*/
-/*
-const form = document.getElementById('user-form');
-const userInput = document.getElementById('user-input');
-
-form.addEventListener('submit', (event) => {
-    const inputValue = userInput.value;
-    console.log('Valeur saisie:', inputValue);
-    theLastResort.executeCmd(inputValue);
- });
-*/
 
 function scrollToBottom() {
     const list = document.getElementById('scrollable-list');

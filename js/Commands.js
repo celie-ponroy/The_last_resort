@@ -34,8 +34,19 @@ export class Script extends Command {
                 break;
             case "celie.sh":
                 res = "its all good celie helped you :)";
+            case "valentin.sh":
+                res = "mini panier de basket :0";
                 break;
+            case "celien.sh":
+                res = "LA PUISSANCE DU NOMBRILAX";
+                break;
+            case "shieldDiagnostic.sh":
+                res = "Shield power too low, 'shield_strength' must be at 100";
+                break
             case "repairPropellers.sh":
+            case "fuelBalance.sh":
+            case "calibrateGravity.sh":
+            case "syncCommSystem.sh":
             case "repairBattery.sh":
             case "repairTankLeaks.sh":
             case "repairElectricalSystems.sh":
@@ -44,7 +55,6 @@ export class Script extends Command {
                 break;
         }
         return res;
-
     }
 }
 

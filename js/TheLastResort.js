@@ -3,6 +3,7 @@ import { Script, Edit, Liste, Cd, Create, Delete } from "./Commands.js";
 
 import { main_directory } from "./Arborescence.js";
 
+let numero_quest = 1;
 
 export class TheLastResort {
     constructor() {
@@ -14,7 +15,7 @@ export class TheLastResort {
         this.initial = 0;
         this.countDownDate = 0;
         this.timeleft = 0;
-        this.initTimer(5);
+        this.initTimer(15);
 
     }
 
@@ -34,7 +35,7 @@ export class TheLastResort {
             switch (command[0]) {
                 case "edit":
                     //classe nano et execution
-                    if (command[1].includes('.')) {
+                    if (this.current_dir.getFileByName(command[1])) {
                         this.current_file = new Edit().execute(command[1], this.current_dir);//rajouter fichiers
                     } else
                         this.addResultToUI("Something went wrong :(");
@@ -108,6 +109,7 @@ export class TheLastResort {
             document.getElementById('scrollable-list').style.display = "block";
 
             this.quests[this.current].checkEdit(this.current_file);
+
             this.addResultToUI("File edited :)");
 
         }
@@ -181,7 +183,10 @@ export class TheLastResort {
             i++;
         });
     }
+
     initNameQuestsUI(quest) {
+
+
         let i = this.quests.length;
         let questElements = document.getElementById('list-quest');
 
@@ -192,8 +197,9 @@ export class TheLastResort {
                 <input type="checkbox" id="${i}" disabled />
                 <label for="${i}" class="check-box"></label>
             </div>
-            ${quest.name}`;
+            ${numero_quest + ' - ' + quest.name}`;
         questElements.appendChild(li);
+        numero_quest++;
     }
 
     updateQuestUI() {
@@ -209,6 +215,8 @@ export class TheLastResort {
         }
         if (win)
             this.replaceUI('Well done you saved the earth!!');
+        this.replaceUI('Your time -->' + this.timeleft);
+
     }
 
     clearPrompt() {
